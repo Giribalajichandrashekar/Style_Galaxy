@@ -278,8 +278,11 @@ nav{
 .acc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.4rem}
 .acc-card{background:var(--card);border:1px solid var(--border);transition:transform .3s,box-shadow .3s;cursor:none;position:relative;overflow:hidden}
 .acc-card:hover{transform:translateY(-5px);box-shadow:0 16px 50px rgba(0,0,0,.4),0 0 0 1px rgba(201,168,76,.2)}
+.acc-card:hover .acc-img{transform:scale(1.06)}
 .acc-visual{width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:5rem;background:linear-gradient(135deg,var(--surface),var(--card));position:relative;overflow:hidden}
 .acc-visual::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(201,168,76,.08),transparent 60%)}
+.acc-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.acc-icon-fallback{position:relative;z-index:1;pointer-events:none}
 .acc-body{padding:1.2rem}
 .acc-name{font-family:'Cormorant Garamond',serif;font-size:1.15rem;margin-bottom:.3rem}
 .acc-match{font-size:.75rem;color:var(--muted);margin-bottom:.8rem;line-height:1.5}
@@ -315,8 +318,12 @@ nav{
 /* ─── TREND BOARD ─── */
 #page-trends{background:var(--ink)}
 .trend-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem}
-.trend-card{background:var(--card);border:1px solid var(--border);padding:2rem;transition:transform .3s,border-color .3s}
+.trend-card{background:var(--card);border:1px solid var(--border);transition:transform .3s,border-color .3s;overflow:hidden}
 .trend-card:hover{transform:translateY(-4px);border-color:var(--border2)}
+.trend-card:hover .trend-img{transform:scale(1.06)}
+.trend-img-wrap{width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;background:var(--surface)}
+.trend-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
+.trend-card-body{padding:2rem}
 .trend-season{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
 .trend-name{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;margin-bottom:.8rem}
 .trend-desc{font-size:.83rem;color:var(--muted);line-height:1.8;margin-bottom:1.2rem}
@@ -677,32 +684,32 @@ nav{
    DATA
 ══════════════════════════════════════════ */
 const OUTFITS_WOMEN=[
-  {id:1,name:'Tonal Earth Co-ord',occ:'casual',emoji:'👗',
-   img:'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=80&fit=crop&crop=top',
+  {id:1,name:'Traditional Look',occ:'casual',emoji:'',
+   img:'media/traditional wear.png',
    tags:['Minimal','Earth Tones','Comfortable'],
    howToWear:'Opt for a matching set in terracotta or beige. Keep accessories minimal — a wicker bag and tan slides are perfect. Tuck the top slightly for shape.',
    pairWith:['Wicker Tote','Tan Slides','Gold Hoops','Demi Sunglasses'],
    aiTip:'Earth tones photograph beautifully in natural light. This co-ord works year-round in Bangalore\'s mild weather — light enough for afternoons, cosy enough for evenings.'},
-  {id:2,name:'Power Blazer Look',occ:'office',emoji:'💼',
-   img:'https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=600&q=80&fit=crop&crop=top',
+  {id:2,name:'Bold Blazer Look',occ:'office',emoji:'💼',
+   img:'media/bold blazer look.png',
    tags:['Office','Structured','Confident'],
    howToWear:'Pair an oversized blazer with high-waist trousers in a tonal colour. Add a fitted inner, pointed-toe heels, and a structured bag. Roll the sleeves one turn for intention.',
    pairWith:['Pointed Heels','Structured Tote','Chain Necklace','Minimalist Watch'],
    aiTip:'The blazer-trouser combo is the most versatile office investment. In neutral tones, it doubles as evening wear with the right accessories.'},
   {id:3,name:'Ivory Salwar Set',occ:'ethnic',emoji:'👘',
-   img:'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600&q=80&fit=crop&crop=top',
+   img:'media/salwar look.png',
    tags:['Ethnic','Elegant','Festive'],
    howToWear:'Let the embroidery do the talking. Wear minimal jewellery — jhumkas or chandbalis. A potli bag in a contrast colour elevates without competing.',
    pairWith:['Jhumka Earrings','Potli Bag','Kolhapuri Chappals','Delicate Bangles'],
    aiTip:'Ivory salwars are timeless for daytime festive events. Add a pashmina dupatta for versatility across seasons.'},
   {id:4,name:'Campus Cool Denim',occ:'college',emoji:'👖',
-   img:'https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=600&q=80&fit=crop&crop=top',
+   img:'media/cool denim look.png',
    tags:['College','Casual','Trendy'],
    howToWear:'High-waist barrel jeans with a cropped tee or tucked-in linen shirt. White sneakers are non-negotiable. Throw in a tote bag for books and personality.',
    pairWith:['White Sneakers','Canvas Tote','Stud Earrings','Minimal Ring Stack'],
    aiTip:'Barrel denim is the silhouette of the moment. It balances proportions beautifully for all body types — the wider leg creates a flattering hourglass effect.'},
   {id:5,name:'Midnight Evening Gown',occ:'evening',emoji:'✨',
-   img:'https://images.unsplash.com/photo-1566174053879-31528523f8ae?w=600&q=80&fit=crop&crop=top',
+   img:'media/eve gown look.png',
    tags:['Evening','Dramatic','Luxury'],
    howToWear:'Let the gown own the room. Keep hair sleek or in a chignon. One statement accessory — either earrings or a necklace, never both.',
    pairWith:['Strappy Heels','Metallic Clutch','Statement Earrings','Subtle Perfume'],
@@ -827,21 +834,21 @@ const OUTFITS_MEN=[
 ];
 
 const ACCESSORIES=[
-  {id:1,name:'Structured Tote',cat:'bags',icon:'👜',match:'Perfect for office and college looks',chips:['Minimal','Everyday'],badge:'Essential'},
-  {id:2,name:'Gold Hoop Earrings',cat:'jewellery',icon:'📿',match:'Elevates ethnic and evening outfits',chips:['Gold','Classic'],badge:null},
-  {id:3,name:'Block Heel Mules',cat:'shoes',icon:'👠',match:'Polishes any office or ethnic look',chips:['Heels','Formal'],badge:'Trending'},
-  {id:4,name:'Silk Scarf',cat:'scarves',icon:'🧣',match:'Adds elegance to casual and office styles',chips:['Silk','Versatile'],badge:null},
-  {id:5,name:'Chain-Link Belt',cat:'scarves',icon:'⛓️',match:'Defines waist on oversized silhouettes',chips:['Statement','Structural'],badge:null},
-  {id:6,name:'Woven Basket Bag',cat:'bags',icon:'🧺',match:'Casual warm-weather essential',chips:['Casual','Summer'],badge:null},
-  {id:7,name:'Pearl Strand Necklace',cat:'jewellery',icon:'🪩',match:'Classic with ethnic and evening looks',chips:['Pearls','Timeless'],badge:'Classic'},
-  {id:8,name:'White Sneakers',cat:'shoes',icon:'👟',match:'The effortless college & casual finish',chips:['Casual','Clean'],badge:'Essential'},
-  {id:9,name:'Sleek Analog Watch',cat:'watches',icon:'⌚',match:'Sharpens any professional outfit',chips:['Minimal','Professional'],badge:null},
-  {id:10,name:'Kolhapuri Chappals',cat:'shoes',icon:'🥿',match:'Authentic ethnic styling',chips:['Ethnic','Artisan'],badge:null},
-  {id:11,name:'Metallic Clutch',cat:'bags',icon:'💼',match:'Evening and festive occasions',chips:['Evening','Formal'],badge:'Evening'},
-  {id:12,name:'Statement Cuff',cat:'jewellery',icon:'💛',match:'Instantly elevates minimal looks',chips:['Bold','Gold'],badge:'Statement'},
-  {id:13,name:'Leather Oxford Shoes',cat:'shoes',icon:'🥾',match:'The menswear finishing touch',chips:['Classic','Formal'],badge:null},
-  {id:14,name:'Brooch / Lapel Pin',cat:'jewellery',icon:'📌',match:'Personalises suits and kurtas',chips:['Heritage','Detail'],badge:null},
-  {id:15,name:'Mojris',cat:'shoes',icon:'🎆',match:'Essential for Indian ethnic wear',chips:['Ethnic','Artisan'],badge:'Cultural'},
+  {id:1,name:'Structured Tote',cat:'bags',icon:'👜',img:'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&q=80&fit=crop',match:'Perfect for office and college looks',chips:['Minimal','Everyday'],badge:'Essential'},
+  {id:2,name:'Gold Hoop Earrings',cat:'jewellery',icon:'📿',img:'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=400&q=80&fit=crop',match:'Elevates ethnic and evening outfits',chips:['Gold','Classic'],badge:null},
+  {id:3,name:'Block Heel Mules',cat:'shoes',icon:'👠',img:'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=400&q=80&fit=crop',match:'Polishes any office or ethnic look',chips:['Heels','Formal'],badge:'Trending'},
+  {id:4,name:'Silk Scarf',cat:'scarves',icon:'🧣',img:'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400&q=80&fit=crop',match:'Adds elegance to casual and office styles',chips:['Silk','Versatile'],badge:null},
+  {id:5,name:'Chain-Link Belt',cat:'scarves',icon:'⛓️',img:'https://images.unsplash.com/photo-1624138784614-87fd1b6528f8?w=400&q=80&fit=crop',match:'Defines waist on oversized silhouettes',chips:['Statement','Structural'],badge:null},
+  {id:6,name:'Woven Basket Bag',cat:'bags',icon:'🧺',img:'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400&q=80&fit=crop',match:'Casual warm-weather essential',chips:['Casual','Summer'],badge:null},
+  {id:7,name:'Pearl Strand Necklace',cat:'jewellery',icon:'🪩',img:'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=400&q=80&fit=crop',match:'Classic with ethnic and evening looks',chips:['Pearls','Timeless'],badge:'Classic'},
+  {id:8,name:'White Sneakers',cat:'shoes',icon:'👟',img:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80&fit=crop',match:'The effortless college & casual finish',chips:['Casual','Clean'],badge:'Essential'},
+  {id:9,name:'Sleek Analog Watch',cat:'watches',icon:'⌚',img:'https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?w=400&q=80&fit=crop',match:'Sharpens any professional outfit',chips:['Minimal','Professional'],badge:null},
+  {id:10,name:'Kolhapuri Chappals',cat:'shoes',icon:'🥿',img:'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=400&q=80&fit=crop',match:'Authentic ethnic styling',chips:['Ethnic','Artisan'],badge:null},
+  {id:11,name:'Metallic Clutch',cat:'bags',icon:'💼',img:'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=400&q=80&fit=crop',match:'Evening and festive occasions',chips:['Evening','Formal'],badge:'Evening'},
+  {id:12,name:'Statement Cuff',cat:'jewellery',icon:'💛',img:'https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=400&q=80&fit=crop',match:'Instantly elevates minimal looks',chips:['Bold','Gold'],badge:'Statement'},
+  {id:13,name:'Leather Oxford Shoes',cat:'shoes',icon:'🥾',img:'https://images.unsplash.com/photo-1533867617858-e7b97e060509?w=400&q=80&fit=crop',match:'The menswear finishing touch',chips:['Classic','Formal'],badge:null},
+  {id:14,name:'Brooch / Lapel Pin',cat:'jewellery',icon:'📌',img:'https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=400&q=80&fit=crop',match:'Personalises suits and kurtas',chips:['Heritage','Detail'],badge:null},
+  {id:15,name:'Mojris',cat:'shoes',icon:'🎆',img:'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400&q=80&fit=crop',match:'Essential for Indian ethnic wear',chips:['Ethnic','Artisan'],badge:'Cultural'},
 ];
 
 const COLOURS=[
@@ -871,12 +878,12 @@ const COMBOS={
 };
 
 const TRENDS=[
-  {season:'SS 2025',name:'Quiet Luxury',desc:'Understated, logo-free dressing in neutral palettes. Cashmere, silk, and fine wool in ivory, camel, and stone. The look is wealth without announcement.',items:['Cashmere Tops','Wide-Leg Trousers','Minimal Leather Bags','No-Logo Basics'],heat:92},
-  {season:'SS 2025',name:'Neo-Ethnic',desc:'Indian craft traditions reimagined through contemporary silhouettes. Block prints on tailored cuts, handloom fabrics styled with modern accessories.',items:['Block Print Blazers','Handloom Co-ords','Contemporary Sarees','Artisan Jewellery'],heat:88},
-  {season:'SS 2025',name:'Coastal Grandmother',desc:'Linen, flowing fabrics, and a relaxed confidence. Straw bags, wide-brim hats, and a palette of sea glass, ivory, and sandy taupe.',items:['Linen Dresses','Wide-Brim Hats','Straw Totes','Woven Sandals'],heat:74},
-  {season:'SS 2025',name:'Dopamine Dressing',desc:'Colour as therapy. Saturated hues, unexpected pairings, and the unapologetic joy of wearing what makes you feel alive.',items:['Color-Block Sets','Bright Accessories','Printed Co-ords','Colour Footwear'],heat:80},
-  {season:'SS 2025',name:'Gorpcore',desc:'Outdoor utility aesthetics brought into everyday fashion. Technical fabrics, cargo pockets, trail-ready footwear, and functional layering.',items:['Cargo Trousers','Technical Vests','Trail Sneakers','Utility Jackets'],heat:65},
-  {season:'SS 2025',name:'Soft Tailoring',desc:'The rigid suit gets a softened update. Unstructured blazers, pleated trousers, and an ease of silhouette that reads refined without stiffness.',items:['Unstructured Blazers','Pleated Trousers','Softened Suiting','Wide Lapels'],heat:85},
+  {season:'SS 2025',name:'Quiet Luxury',img:'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600&q=80&fit=crop&crop=top',desc:'Understated, logo-free dressing in neutral palettes. Cashmere, silk, and fine wool in ivory, camel, and stone. The look is wealth without announcement.',items:['Cashmere Tops','Wide-Leg Trousers','Minimal Leather Bags','No-Logo Basics'],heat:92},
+  {season:'SS 2025',name:'Neo-Ethnic',img:'https://images.unsplash.com/photo-1617019114583-affb34d1b3cd?w=600&q=80&fit=crop&crop=top',desc:'Indian craft traditions reimagined through contemporary silhouettes. Block prints on tailored cuts, handloom fabrics styled with modern accessories.',items:['Block Print Blazers','Handloom Co-ords','Contemporary Sarees','Artisan Jewellery'],heat:88},
+  {season:'SS 2025',name:'Coastal Grandmother',img:'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=80&fit=crop&crop=top',desc:'Linen, flowing fabrics, and a relaxed confidence. Straw bags, wide-brim hats, and a palette of sea glass, ivory, and sandy taupe.',items:['Linen Dresses','Wide-Brim Hats','Straw Totes','Woven Sandals'],heat:74},
+  {season:'SS 2025',name:'Dopamine Dressing',img:'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&q=80&fit=crop&crop=top',desc:'Colour as therapy. Saturated hues, unexpected pairings, and the unapologetic joy of wearing what makes you feel alive.',items:['Color-Block Sets','Bright Accessories','Printed Co-ords','Colour Footwear'],heat:80},
+  {season:'SS 2025',name:'Gorpcore',img:'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=600&q=80&fit=crop&crop=top',desc:'Outdoor utility aesthetics brought into everyday fashion. Technical fabrics, cargo pockets, trail-ready footwear, and functional layering.',items:['Cargo Trousers','Technical Vests','Trail Sneakers','Utility Jackets'],heat:65},
+  {season:'SS 2025',name:'Soft Tailoring',img:'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80&fit=crop&crop=top',desc:'The rigid suit gets a softened update. Unstructured blazers, pleated trousers, and an ease of silhouette that reads refined without stiffness.',items:['Unstructured Blazers','Pleated Trousers','Softened Suiting','Wide Lapels'],heat:85},
 ];
 
 /* ══════════ STATE ══════════ */
@@ -943,8 +950,8 @@ function outfitCard(o){
   const isSaved=saved.includes(o.id);
   return `<div class="outfit-card" onclick="openModal(${o.id})">
     <div class="outfit-thumb">
-      ${o.img?`<img class="card-img" src="${o.img}" alt="${o.name}" loading="lazy" onerror="this.style.display='none'"/>`:``}
-      <div class="card-img-placeholder">${o.emoji||'👗'}</div>
+      ${o.img?`<img class="card-img" src="${o.img}" alt="${o.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>`:``}
+      <div class="card-img-placeholder" ${o.img?'style="display:none"':''}>${o.emoji||'👗'}</div>
       <div class="card-overlay"></div>
       <div class="card-view-btn">View Details</div>
     </div>
@@ -1061,14 +1068,17 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSearch();close
 function renderTrends(){
   document.getElementById('trend-grid').innerHTML=TRENDS.map(t=>`
     <div class="trend-card">
-      <div class="trend-season">${t.season}</div>
-      <div class="trend-name">${t.name}</div>
-      <div class="trend-desc">${t.desc}</div>
-      <div class="trend-items">${t.items.map(i=>`<span class="trend-item">${i}</span>`).join('')}</div>
-      <div class="trend-heat">
-        <span class="heat-label">Heat</span>
-        <div class="heat-bar"><div class="heat-fill" style="width:0%" data-w="${t.heat}%"></div></div>
-        <span style="font-size:.7rem;color:var(--gold)">${t.heat}%</span>
+      ${t.img?`<div class="trend-img-wrap"><img class="trend-img" src="${t.img}" alt="${t.name}" loading="lazy" onerror="this.parentElement.style.display='none'"/></div>`:''}
+      <div class="trend-card-body">
+        <div class="trend-season">${t.season}</div>
+        <div class="trend-name">${t.name}</div>
+        <div class="trend-desc">${t.desc}</div>
+        <div class="trend-items">${t.items.map(i=>`<span class="trend-item">${i}</span>`).join('')}</div>
+        <div class="trend-heat">
+          <span class="heat-label">Heat</span>
+          <div class="heat-bar"><div class="heat-fill" style="width:0%" data-w="${t.heat}%"></div></div>
+          <span style="font-size:.7rem;color:var(--gold)">${t.heat}%</span>
+        </div>
       </div>
     </div>`).join('');
   // animate heat bars
@@ -1205,7 +1215,10 @@ function renderAccessories(filter){
   document.getElementById('acc-grid').innerHTML=data.map(a=>`
     <div class="acc-card" style="animation:fadeUp .5s both">
       ${a.badge?`<div class="acc-badge">${a.badge}</div>`:''}
-      <div class="acc-visual">${a.icon}</div>
+      <div class="acc-visual">
+        ${a.img?`<img class="acc-img" src="${a.img}" alt="${a.name}" loading="lazy" onerror="this.style.display='none'"/>`:``}
+        <span class="acc-icon-fallback">${a.icon}</span>
+      </div>
       <div class="acc-body">
         <div class="acc-name">${a.name}</div>
         <div class="acc-match">${a.match}</div>
