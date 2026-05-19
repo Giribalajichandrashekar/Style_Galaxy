@@ -1,1539 +1,824 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<link rel="shortcut icon" href="./media/SG icon.png" type="image/x-icon">
-<title>Style Galaxy</title>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="./media/others/SG icon.png" type="image/x-icon">
+<title>StyleGalaxy</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{
-  --ink:#0c0b09;
-  --paper:#141210;
-  --surface:#1c1a17;
-  --card:#242118;
-  --gold:#c9a84c;
-  --gold2:#e8c97a;
-  --cream:#f0ead8;
-  --muted:#7a7060;
-  --border:rgba(201,168,76,0.15);
-  --border2:rgba(201,168,76,0.3);
-  --glow:0 0 50px rgba(201,168,76,0.12);
+:root {
+  --bg: #000000;
+  --surface: #0d0f18;
+  --card: #111520;
+  --card-hover: #161b2a;
+  --accent: #f0a500;
+  --accent2: #e8356d;
+  --gold: #c9a84c;
+  --teal: #00c9b1;
+  --text: #eeeef5;
+  --muted: #6e7280;
+  --border: rgba(255,255,255,0.07);
+  --radius: 18px;
+  --shadow: 0 20px 60px rgba(0,0,0,0.6);
 }
-html{scroll-behavior:smooth}
-body{background:var(--ink);color:var(--cream);font-family:'Outfit',sans-serif;font-weight:300;overflow-x:hidden;cursor:default}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
 
-/* ─── SCROLLBAR ─── */
-::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-track{background:var(--ink)}
-::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:transparent;}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
 
-/* ─── NAV ─── */
-nav{
-  position:fixed;top:0;left:0;right:0;z-index:500;
-  display:flex;align-items:center;justify-content:space-between;
-  padding:1.6rem 4rem;
-  background:linear-gradient(to bottom,rgba(12,11,9,0.97),transparent);
-  pointer-events:none;
-}
-.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;letter-spacing:.18em;color:var(--gold);pointer-events:all;cursor:pointer}
-.nav-links{display:flex;gap:2rem;pointer-events:all;align-items:center}
-.nav-links button{background:none;border:none;color:var(--muted);font-family:'Outfit',sans-serif;font-size:.72rem;font-weight:400;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:color .25s;padding:.3rem 0}
-.nav-links button:hover,.nav-links button.active{color:var(--gold)}
-.nav-links button.active{border-bottom:1px solid var(--gold)}
-.nav-search-btn{background:none;border:1px solid var(--border);color:var(--muted);width:32px;height:32px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .25s;font-size:.9rem;pointer-events:all}
-.nav-search-btn:hover{border-color:var(--gold);color:var(--gold)}
+/* ── HEADER ── */
+header{position:sticky;top:0;z-index:100;background:rgba(7,8,13,0.94);backdrop-filter:blur(24px);border-bottom:1px solid var(--border);padding:0 28px;height:66px;display:flex;align-items:center;gap:18px;}
+.logo{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:700;background:linear-gradient(135deg,var(--gold),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;white-space:nowrap;letter-spacing:-0.3px;}
+.logo em{font-style:italic;}
+.search-bar{flex:1;max-width:420px;position:relative;}
+.search-bar input{width:100%;padding:10px 18px 10px 42px;background:var(--surface);border:1px solid var(--border);border-radius:50px;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:13px;outline:none;transition:border-color 0.2s;}
+.search-bar input:focus{border-color:var(--accent);}
+.search-bar .s-ico{position:absolute;left:14px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:14px;}
+.header-right{display:flex;align-items:center;gap:10px;margin-left:auto;}
+.ai-btn{display:flex;align-items:center;gap:7px;background:linear-gradient(135deg,rgba(0,201,177,0.15),rgba(0,201,177,0.05));border:1px solid rgba(0,201,177,0.3);color:var(--teal);font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:13px;padding:9px 16px;border-radius:50px;cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.ai-btn:hover{background:rgba(0,201,177,0.2);box-shadow:0 0 20px rgba(0,201,177,0.2);}
+.cart-btn{display:flex;align-items:center;gap:7px;background:var(--accent);color:#000;font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:13px;padding:9px 18px;border-radius:50px;cursor:pointer;border:none;transition:all 0.2s;white-space:nowrap;}
+.cart-btn:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(240,165,0,0.4);}
+#cart-count{background:var(--accent2);color:#fff;border-radius:50%;width:19px;height:19px;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;}
 
-/* ─── SEARCH OVERLAY ─── */
-#search-overlay{
-  position:fixed;inset:0;z-index:800;background:rgba(12,11,9,.97);
-  display:none;flex-direction:column;align-items:center;justify-content:flex-start;
-  padding:8rem 2rem 2rem;
-}
-#search-overlay.open{display:flex}
-.search-input-wrap{width:100%;max-width:700px;position:relative}
-#search-input{
-  width:100%;background:none;border:none;border-bottom:1px solid var(--border2);
-  color:var(--cream);font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,3rem);
-  font-weight:300;padding:.8rem 3rem .8rem 0;outline:none;letter-spacing:.02em;
-}
-#search-input::placeholder{color:var(--muted)}
-.search-close{
-  position:absolute;right:0;top:50%;transform:translateY(-50%);
-  background:none;border:none;color:var(--muted);font-size:1.4rem;cursor:pointer;
-  transition:color .2s;
-}
-.search-close:hover{color:var(--gold)}
-#search-results{width:100%;max-width:700px;margin-top:3rem}
-.search-result-item{
-  border-bottom:1px solid var(--border);padding:1.2rem 0;
-  display:flex;align-items:center;gap:1.2rem;cursor:pointer;
-  transition:background .2s;
-}
-.search-result-item:hover{background:rgba(201,168,76,.04)}
-.search-result-img{
-  width:56px;height:70px;object-fit:cover;background:var(--card);flex-shrink:0;
-  display:flex;align-items:center;justify-content:center;font-size:1.5rem;
-}
-.search-result-info h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;margin-bottom:.2rem}
-.search-result-info p{font-size:.75rem;color:var(--muted)}
-.search-no-results{color:var(--muted);font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1.2rem;margin-top:2rem}
+/* ── HERO ── */
+.hero{text-align:center;padding:72px 20px 52px;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(192,160,76,0.12) 0%,transparent 70%);position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 80%,rgba(232,53,109,0.06),transparent 50%),radial-gradient(circle at 80% 20%,rgba(0,201,177,0.06),transparent 50%);pointer-events:none;}
+.hero h1{font-style: bold; /*font-size:100px;*/ letter-spacing: -1px; font-family:'Cormorant Garamond',serif;background:linear-gradient(120deg,var(--gold),var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent; font-size:clamp(5px,13vw,712px);font-weight:300; line-height:1.05 ; margin-bottom:0px;}
+.hero h1 em{font-style:italic;font-size: 40px; margin-top: -10px; letter-spacing: 2px;linear-gradient(120deg,var(--gold),var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
+.hero p{color:var(--muted);font-size:15px;max-width:460px;margin:0 auto 32px;line-height:1.65;}
+.hero-tags{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.hero-tag{padding:6px 14px;border:1px solid var(--border);border-radius:50px;font-size:12px;color:var(--muted);}
+.hero-tag span{color:var(--teal);margin-right:4px;}
 
-/* ─── PAGE SYSTEM ─── */
-.page{display:none;min-height:100vh}
-.page.active{display:block}
+/* ── FILTER BAR ── */
+.filter-section{padding:0 24px 28px;}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:10px;}
+.pill{padding:8px 18px;border-radius:50px;border:1px solid var(--border);background:var(--surface);color:var(--muted);font-size:12px;font-weight:500;cursor:pointer;transition:all 0.2s;user-select:none;}
+.pill:hover,.pill.active{border-color:var(--accent);color:var(--accent);background:rgba(240,165,0,0.08);}
+.pill.active{font-weight:700;}
+.adv-filters{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
+.filter-select{background:var(--surface);border:1px solid var(--border);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;padding:7px 12px;border-radius:10px;outline:none;cursor:pointer;}
+.filter-select:focus{border-color:var(--accent);}
 
-/* ─── HERO ─── */
-#page-home{
-  position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  min-height:100vh;overflow:hidden;
-  background:radial-gradient(ellipse 80% 60% at 50% 60%,rgba(201,168,76,0.06) 0%,transparent 70%),var(--ink);
-}
-.hero-bg-text{
-  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  font-family:'Cormorant Garamond',serif;font-size:28vw;font-weight:700;
-  color:rgba(201,168,76,0.03);letter-spacing:-.02em;white-space:nowrap;pointer-events:none;user-select:none;
-}
-.hero-content{position:relative;z-index:2;text-align:center;padding:0 2rem}
-.hero-eyebrow{font-size:.68rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);font-weight:400;margin-bottom:2rem;animation:fadeUp .9s .1s both}
-.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(5rem,13vw,12rem);font-weight:300;letter-spacing:-.01em;line-height:.9;color:var(--cream);animation:fadeUp .9s .25s both}
-.hero-title em{font-style:italic;color:var(--gold)}
-.hero-sub{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(1.1rem,2vw,1.5rem);color:var(--muted);margin-top:1.8rem;letter-spacing:.05em;animation:fadeUp .9s .4s both}
-.hero-divider{width:1px;height:60px;background:linear-gradient(to bottom,var(--gold),transparent);margin:3rem auto;animation:fadeUp .9s .55s both}
-.hero-actions{display:flex;gap:1.2rem;justify-content:center;flex-wrap:wrap;animation:fadeUp .9s .65s both}
-.hero-stats{display:flex;gap:3rem;justify-content:center;margin-top:4rem;animation:fadeUp .9s .8s both}
-.stat{text-align:center}
-.stat-num{font-family:'Cormorant Garamond',serif;font-size:2.2rem;color:var(--gold);font-weight:300}
-.stat-label{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-top:.3rem}
+/* ── GRID HEADER ── */
+.grid-header{padding:0 28px 14px;display:flex;align-items:center;justify-content:space-between;}
+.grid-header span{color:var(--muted);font-size:13px;}
+.sort-select{background:var(--surface);border:1px solid var(--border);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:12px;padding:7px 12px;border-radius:8px;outline:none;cursor:pointer;}
 
-/* ─── BUTTONS ─── */
-.btn-gold{background:var(--gold);color:var(--ink);border:none;padding:.85rem 2.4rem;font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:500;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:background .25s,transform .25s,box-shadow .25s}
-.btn-gold:hover{background:var(--gold2);transform:translateY(-2px);box-shadow:0 8px 30px rgba(201,168,76,0.3)}
-.btn-outline{background:transparent;color:var(--gold);border:1px solid var(--border2);padding:.85rem 2.4rem;font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:background .25s,border-color .25s,transform .25s}
-.btn-outline:hover{background:rgba(201,168,76,0.08);border-color:var(--gold);transform:translateY(-2px)}
+/* ── PRODUCT GRID ── */
+.container{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;padding:0 22px 80px;}
 
-/* ─── SECTION WRAPPER ─── */
-.section-wrap{max-width:1200px;margin:0 auto;padding:6rem 4rem}
-.section-header{margin-bottom:3.5rem}
-.sec-tag{font-size:.65rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:400;margin-bottom:.8rem}
-.sec-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.4rem,5vw,4rem);font-weight:300;line-height:1.05;color:var(--cream)}
-.sec-title em{font-style:italic;color:var(--gold)}
-.sec-sub{color:var(--muted);font-size:.9rem;margin-top:.8rem;max-width:500px;line-height:1.8}
+/* ── PRODUCT CARD ── */
+.card{background:var(--card);border-radius:var(--radius);overflow:hidden;border:1px solid var(--border);transition:transform 0.25s ease,box-shadow 0.25s ease,border-color 0.25s;cursor:pointer;position:relative;}
+.card:hover{transform:translateY(-6px);border-color:rgba(192,160,76,0.35);box-shadow:0 20px 50px rgba(0,0,0,0.55);background:var(--card-hover);}
+.card-img-wrap{position:relative;overflow:hidden;height:270px;}
+.card img{width:100%;height:100%;object-fit:cover;transition:transform 0.45s ease;display:block;}
+.card:hover img{transform:scale(1.07);}
+.badge{position:absolute;top:10px;left:10px;background:var(--accent2);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:6px;letter-spacing:0.3px;}
+.wishlist-btn{position:absolute;top:10px;right:10px;width:32px;height:32px;background:rgba(7,8,13,0.72);backdrop-filter:blur(8px);border-radius:50%;display:flex;align-items:center;justify-content:center;border:1px solid var(--border);cursor:pointer;font-size:14px;transition:all 0.2s;}
+.wishlist-btn:hover,.wishlist-btn.loved{background:var(--accent2);border-color:var(--accent2);}
+.wishlist-btn.loved{color:#fff;}
+.card-body{padding:13px 13px 15px;}
+.card-brand{font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px;}
+.card-name{font-size:13px;font-weight:500;color:var(--text);margin-bottom:5px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+.card-category{font-size:10px;color:var(--muted);margin-bottom:7px;}
+.rating-row{display:flex;align-items:center;gap:5px;margin-bottom:9px;}
+.stars{color:var(--accent);font-size:11px;}
+.rating-num{font-size:11px;font-weight:700;}
+.review-count{font-size:10px;color:var(--muted);}
+.price-row{display:flex;align-items:baseline;gap:7px;margin-bottom:11px;}
+.price{font-size:17px;font-weight:800;color:#fff;}
+.original-price{font-size:12px;color:var(--muted);text-decoration:line-through;}
+.discount-tag{font-size:10px;font-weight:800;color:#4ade80;background:rgba(74,222,128,0.1);padding:2px 6px;border-radius:5px;}
+.add-btn{width:100%;padding:10px;background:var(--accent);color:#000;border:none;border-radius:10px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:12px;cursor:pointer;transition:opacity 0.2s,transform 0.15s;letter-spacing:0.2px;}
+.add-btn:hover{opacity:0.88;transform:scale(0.99);}
+.add-btn:active{transform:scale(0.97);}
 
-/* ─── GENDER TOGGLE ─── */
-.gender-toggle{display:inline-flex;border:1px solid var(--border2);margin-bottom:1.8rem;overflow:hidden}
-.g-btn{background:none;border:none;color:var(--muted);padding:.7rem 2rem;font-family:'Outfit',sans-serif;font-size:.78rem;font-weight:400;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:all .25s;display:flex;align-items:center;gap:.5rem}
-.g-btn:first-child{border-right:1px solid var(--border2)}
-.g-btn.active{background:var(--gold);color:var(--ink);font-weight:500}
-.g-btn:not(.active):hover{background:rgba(201,168,76,.08);color:var(--cream)}
+/* ── AI STYLE PANEL ── */
+.ai-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.65);z-index:199;opacity:0;pointer-events:none;transition:opacity 0.3s;backdrop-filter:blur(4px);}
+.ai-overlay.active{opacity:1;pointer-events:all;}
+.ai-panel{position:fixed;left:-520px;top:0;width:500px;height:100%;background:var(--surface);border-right:1px solid var(--border);z-index:200;display:flex;flex-direction:column;transition:left 0.38s cubic-bezier(0.4,0,0.2,1);overflow:hidden;}
+.ai-panel.active{left:0;}
+.ai-panel-header{padding:22px 24px 18px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,rgba(0,201,177,0.08),transparent);}
+.ai-panel-header h2{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;color:var(--teal);}
+.ai-panel-header p{font-size:12px;color:var(--muted);margin-top:2px;}
+.close-ai{width:32px;height:32px;border-radius:50%;background:var(--card);border:1px solid var(--border);color:var(--text);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
+.close-ai:hover{background:var(--accent2);}
+.ai-body{flex:1;overflow-y:auto;padding:20px 24px;}
+.ai-section{margin-bottom:24px;}
+.ai-section-title{font-size:11px;font-weight:700;color:var(--teal);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;}
+.option-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.option-grid.cols2{grid-template-columns:repeat(2,1fr);}
+.option-btn{padding:10px 8px;border:1px solid var(--border);border-radius:10px;background:var(--card);color:var(--muted);font-size:12px;font-weight:500;cursor:pointer;text-align:center;transition:all 0.2s;line-height:1.3;}
+.option-btn span{display:block;font-size:18px;margin-bottom:4px;}
+.option-btn:hover{border-color:var(--teal);color:var(--teal);}
+.option-btn.selected{border-color:var(--teal);color:var(--teal);background:rgba(0,201,177,0.1);font-weight:700;}
+.skin-btn{border-radius:50%;width:40px;height:40px;border:2px solid var(--border);cursor:pointer;transition:all 0.2s;display:flex;align-items:center;justify-content:center;font-size:10px;color:#fff;font-weight:700;}
+.skin-btn.selected{border-width:3px;transform:scale(1.15);box-shadow:0 0 16px rgba(0,201,177,0.4);}
+.skin-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+.skin-label{font-size:11px;color:var(--muted);margin-top:4px;text-align:center;}
+.skin-wrap{text-align:center;}
+.ai-generate-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--teal),#00a396);color:#000;border:none;border-radius:12px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:14px;cursor:pointer;transition:opacity 0.2s;letter-spacing:0.3px;margin-top:8px;}
+.ai-generate-btn:hover{opacity:0.88;}
+.ai-results{margin-top:20px;border-top:1px solid var(--border);padding-top:20px;}
+.ai-results-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.ai-results-title span{background:var(--accent2);color:#fff;font-size:9px;padding:2px 7px;border-radius:50px;font-weight:800;}
+.outfit-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:10px;display:flex;gap:12px;align-items:flex-start;}
+.outfit-card img{width:56px;height:70px;border-radius:8px;object-fit:cover;flex-shrink:0;}
+.outfit-info h4{font-size:12px;font-weight:700;margin-bottom:3px;color:var(--text);}
+.outfit-info p{font-size:11px;color:var(--muted);line-height:1.4;}
+.outfit-info .why{font-size:10px;color:var(--teal);margin-top:4px;}
+.outfit-add-btn{font-size:10px;font-weight:700;color:#000;background:var(--teal);border:none;padding:4px 10px;border-radius:6px;cursor:pointer;margin-top:6px;}
 
-/* ─── OCCASION TABS ─── */
-#page-occasion{background:var(--ink)}
-.occasion-tabs{display:flex;gap:0;border:1px solid var(--border);overflow-x:auto;margin-bottom:3rem}
-.occ-tab{background:none;border:none;border-right:1px solid var(--border);color:var(--muted);padding:.9rem 1.8rem;font-family:'Outfit',sans-serif;font-size:.72rem;font-weight:400;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:background .2s,color .2s;white-space:nowrap}
-.occ-tab:last-child{border-right:none}
-.occ-tab:hover,.occ-tab.active{background:rgba(201,168,76,0.08);color:var(--gold)}
-.outfit-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5rem}
+/* ── AVATAR PREVIEW ── */
+.avatar-wrap{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px;text-align:center;margin-bottom:20px;}
+.avatar-title{font-size:11px;color:var(--muted);margin-bottom:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;}
+.avatar-svg{margin:0 auto;display:block;}
 
-/* ─── OUTFIT CARD ─── */
-.outfit-card{background:var(--card);border:1px solid var(--border);position:relative;overflow:hidden;transition:transform .35s,box-shadow .35s;cursor:pointer;display:block}
-.outfit-card:hover{transform:translateY(-6px);box-shadow:0 20px 60px rgba(0,0,0,.5),0 0 0 1px rgba(201,168,76,0.2)}
-.outfit-card:hover .card-overlay{opacity:1}
-.outfit-card:hover .card-img{transform:scale(1.06)}
-.outfit-thumb{width:100%;aspect-ratio:3/4;position:relative;overflow:hidden;background:var(--card)}
-.card-img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease;display:block}
-.card-img-placeholder{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:4rem;background:linear-gradient(160deg,var(--surface),var(--card))}
-.card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(12,11,9,.97) 35%,rgba(12,11,9,.1) 70%,transparent);opacity:.75;transition:opacity .35s}
-.card-view-btn{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(201,168,76,.15);border:1px solid var(--border2);color:var(--gold);font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;padding:.5rem 1rem;opacity:0;transition:opacity .3s;white-space:nowrap;backdrop-filter:blur(4px)}
-.outfit-card:hover .card-view-btn{opacity:1}
-.card-info{position:absolute;bottom:0;left:0;right:0;padding:1.4rem;z-index:2}
-.card-name{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;margin-bottom:.3rem;color:var(--cream)}
-.card-tags{display:flex;gap:.5rem;flex-wrap:wrap}
-.tag{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;border:1px solid var(--border2);color:var(--gold);padding:.2rem .6rem}
-.card-save{position:absolute;top:1rem;right:1rem;z-index:3;background:rgba(12,11,9,.7);border:1px solid var(--border2);color:var(--gold);width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:1rem;cursor:pointer;opacity:0;transition:opacity .3s,background .2s}
-.outfit-card:hover .card-save{opacity:1}
-.card-save:hover{background:rgba(201,168,76,0.2)}
-.card-save.saved{opacity:1;background:rgba(201,168,76,0.2);color:var(--gold2)}
+/* ── OUTFIT RECOMMENDER SECTION ── */
+.outfit-section{padding:40px 24px;background:linear-gradient(180deg,transparent,rgba(0,201,177,0.04),transparent);}
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(24px,4vw,36px);font-weight:700;margin-bottom:6px;text-align:center;}
+.section-sub{color:var(--muted);font-size:14px;text-align:center;margin-bottom:28px;}
+.occasion-tabs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:28px;}
+.occ-tab{padding:9px 22px;border:1px solid var(--border);border-radius:50px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;transition:all 0.2s;background:var(--surface);}
+.occ-tab:hover,.occ-tab.active{border-color:var(--teal);color:var(--teal);background:rgba(0,201,177,0.08);}
+.outfit-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px;}
+.outfit-combo{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:transform 0.25s,box-shadow 0.25s;}
+.outfit-combo:hover{transform:translateY(-4px);box-shadow:var(--shadow);}
+.outfit-combo-header{padding:14px 16px 10px;display:flex;justify-content:space-between;align-items:center;}
+.outfit-combo-header h3{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:700;}
+.outfit-combo-header .occ-badge{font-size:10px;font-weight:700;background:rgba(0,201,177,0.1);color:var(--teal);border:1px solid rgba(0,201,177,0.25);padding:3px 9px;border-radius:50px;}
+.outfit-images{display:flex;gap:6px;padding:0 12px 12px;}
+.outfit-images img{flex:1;height:130px;object-fit:cover;border-radius:10px;}
+.outfit-combo-footer{padding:10px 16px 14px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;}
+.outfit-combo-footer span{font-size:13px;color:var(--muted);}
+.combo-add-btn{font-size:12px;font-weight:700;color:#000;background:var(--accent);border:none;padding:7px 14px;border-radius:8px;cursor:pointer;transition:opacity 0.2s;}
+.combo-add-btn:hover{opacity:0.85;}
 
-/* ─── OUTFIT DETAIL MODAL ─── */
-#outfit-modal{
-  position:fixed;inset:0;z-index:700;background:rgba(12,11,9,.95);
-  display:none;overflow-y:auto;
-}
-#outfit-modal.open{display:block}
-.modal-inner{max-width:900px;margin:0 auto;padding:5rem 2rem;animation:fadeUp .4s both}
-.modal-close{
-  position:fixed;top:1.5rem;right:2rem;background:none;border:1px solid var(--border);
-  color:var(--muted);width:40px;height:40px;display:flex;align-items:center;justify-content:center;
-  font-size:1.2rem;cursor:pointer;transition:all .2s;z-index:710;
-}
-.modal-close:hover{border-color:var(--gold);color:var(--gold)}
-.modal-layout{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
-@media(max-width:700px){.modal-layout{grid-template-columns:1fr}}
-.modal-img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block}
-.modal-img-placeholder{width:100%;aspect-ratio:3/4;display:flex;align-items:center;justify-content:center;font-size:6rem;background:linear-gradient(160deg,var(--surface),var(--card));border:1px solid var(--border)}
-.modal-details{position:sticky;top:5rem}
-.modal-occ{font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem}
-.modal-name{font-family:'Cormorant Garamond',serif;font-size:2.8rem;font-weight:300;line-height:1.05;margin-bottom:1rem}
-.modal-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem}
-.modal-section-title{font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;margin-top:1.8rem}
-.modal-how-to-wear{font-size:.88rem;color:var(--muted);line-height:1.9;margin-bottom:1.5rem}
-.modal-pair-items{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.5rem}
-.pair-chip{border:1px solid var(--border);color:var(--cream);font-size:.72rem;padding:.3rem .7rem;letter-spacing:.08em}
-.modal-ai-tip{background:var(--card);border:1px solid var(--border);padding:1.4rem;margin-top:1.5rem}
-.modal-ai-tip-label{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem}
-.ai-dot{width:6px;height:6px;background:var(--gold);border-radius:50%;animation:pulse 1.5s infinite}
-.modal-ai-tip-text{font-size:.85rem;color:var(--muted);line-height:1.8}
-.modal-actions{display:flex;gap:.8rem;margin-top:2rem;flex-wrap:wrap}
-.btn-save-modal{background:none;border:1px solid var(--border2);color:var(--gold);padding:.75rem 1.6rem;font-family:'Outfit',sans-serif;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .25s}
-.btn-save-modal:hover,.btn-save-modal.saved{background:rgba(201,168,76,.15)}
+/* ── CART SIDEBAR ── */
+.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:199;opacity:0;pointer-events:none;transition:opacity 0.3s;}
+.cart-overlay.active{opacity:1;pointer-events:all;}
+.cart{position:fixed;right:-430px;top:0;width:410px;height:100%;background:var(--surface);border-left:1px solid var(--border);z-index:200;display:flex;flex-direction:column;transition:right 0.35s cubic-bezier(0.4,0,0.2,1);overflow:hidden;}
+.cart.active{right:0;}
+.cart-header{padding:22px 24px 18px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;}
+.cart-header h2{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:700;}
+.close-cart{width:32px;height:32px;border-radius:50%;background:var(--card);border:1px solid var(--border);color:var(--text);font-size:16px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;}
+.close-cart:hover{background:var(--accent2);}
+.cart-items{flex:1;overflow-y:auto;padding:14px 22px;}
+.cart-item{display:flex;gap:11px;padding:13px 0;border-bottom:1px solid var(--border);animation:slideIn 0.25s ease;}
+@keyframes slideIn{from{opacity:0;transform:translateX(20px);}to{opacity:1;transform:translateX(0);}}
+.cart-item img{width:64px;height:64px;border-radius:10px;object-fit:cover;flex-shrink:0;}
+.cart-item-info{flex:1;}
+.cart-item-name{font-size:12px;font-weight:600;margin-bottom:2px;line-height:1.3;}
+.cart-item-brand{font-size:10px;color:var(--gold);}
+.cart-item-price{font-size:14px;font-weight:800;margin-top:4px;}
+.cart-remove{background:none;border:none;color:var(--muted);cursor:pointer;font-size:17px;padding:0 3px;transition:color 0.2s;align-self:flex-start;margin-top:2px;}
+.cart-remove:hover{color:var(--accent2);}
+.empty-cart{text-align:center;padding:70px 0;color:var(--muted);}
+.empty-cart .icon{font-size:48px;margin-bottom:12px;}
+.empty-cart p{font-size:14px;}
+.cart-footer{padding:18px 22px;border-top:1px solid var(--border);}
+.cart-total-row{display:flex;justify-content:space-between;margin-bottom:5px;font-size:13px;color:var(--muted);}
+.cart-grand-total{display:flex;justify-content:space-between;margin-bottom:16px;font-size:18px;font-weight:800;}
+.checkout-btn{width:100%;padding:14px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border:none;border-radius:12px;font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:14px;cursor:pointer;transition:opacity 0.2s;letter-spacing:0.3px;}
+.checkout-btn:hover{opacity:0.88;}
 
-/* ─── STYLE GUIDE PAGE ─── */
-#page-guide{background:var(--ink)}
-.guide-hero{background:linear-gradient(135deg,var(--surface) 0%,var(--card) 100%);border-bottom:1px solid var(--border);padding:5rem 0 4rem;margin-bottom:0}
-.guide-hero-inner{max-width:1200px;margin:0 auto;padding:0 4rem}
-.guide-chapters{display:grid;grid-template-columns:240px 1fr;gap:4rem;align-items:start;max-width:1200px;margin:0 auto;padding:4rem}
-@media(max-width:900px){.guide-chapters{grid-template-columns:1fr;padding:2rem 1.5rem}}
-.guide-toc{position:sticky;top:7rem;background:var(--card);border:1px solid var(--border);padding:1.8rem}
-.guide-toc-title{font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem}
-.guide-toc-link{display:block;font-size:.78rem;color:var(--muted);padding:.55rem 0;border-bottom:1px solid var(--border);cursor:pointer;transition:color .2s;letter-spacing:.04em}
-.guide-toc-link:last-child{border-bottom:none}
-.guide-toc-link:hover,.guide-toc-link.active{color:var(--gold)}
-.guide-toc-link.active{padding-left:.6rem;border-left:2px solid var(--gold)}
-.guide-articles{display:flex;flex-direction:column;gap:4rem}
-.guide-article{border-bottom:1px solid var(--border);padding-bottom:4rem}
-.guide-article:last-child{border-bottom:none}
-.guide-article-tag{font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem}
-.guide-article-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:300;line-height:1.1;margin-bottom:1.2rem;color:var(--cream)}
-.guide-article-title em{font-style:italic;color:var(--gold)}
-.guide-article-lead{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--muted);margin-bottom:2rem;line-height:1.8;border-left:2px solid var(--border2);padding-left:1.2rem}
-.guide-article-body{font-size:.88rem;color:var(--muted);line-height:2;max-width:680px}
-.guide-article-body p{margin-bottom:1.4rem}
-.guide-article-body strong{color:var(--cream);font-weight:500}
-.guide-rule-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem;margin:2rem 0}
-.guide-rule{background:var(--card);border:1px solid var(--border);padding:1.4rem;transition:border-color .25s,transform .25s}
-.guide-rule:hover{border-color:var(--border2);transform:translateY(-3px)}
-.guide-rule-num{font-family:'Cormorant Garamond',serif;font-size:2.5rem;color:rgba(201,168,76,.2);font-weight:700;line-height:1;margin-bottom:.6rem}
-.guide-rule-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;margin-bottom:.4rem;color:var(--cream)}
-.guide-rule-text{font-size:.75rem;color:var(--muted);line-height:1.7}
-.guide-palette-row{display:flex;gap:1rem;flex-wrap:wrap;margin:2rem 0}
-.guide-palette-card{flex:1;min-width:160px;border:1px solid var(--border);overflow:hidden;transition:transform .25s}
-.guide-palette-card:hover{transform:translateY(-3px)}
-.guide-palette-swatches{display:flex;height:70px}
-.guide-palette-swatches span{flex:1}
-.guide-palette-info{background:var(--card);padding:.9rem 1rem}
-.guide-palette-name{font-family:'Cormorant Garamond',serif;font-size:1rem;margin-bottom:.2rem}
-.guide-palette-desc{font-size:.7rem;color:var(--muted);line-height:1.5}
-.guide-tip-box{background:var(--card);border:1px solid var(--border2);padding:1.6rem 1.8rem;margin:2rem 0;position:relative;overflow:hidden}
-.guide-tip-box::before{content:'✦';position:absolute;right:1.5rem;top:1rem;font-size:1.5rem;color:rgba(201,168,76,.15)}
-.guide-tip-label{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
-.guide-tip-text{font-size:.88rem;color:var(--cream);line-height:1.85}
-.guide-body-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:1rem;margin:2rem 0}
-.guide-body-card{background:var(--card);border:1px solid var(--border);padding:1.4rem;text-align:center;transition:border-color .25s,transform .25s}
-.guide-body-card:hover{border-color:var(--border2);transform:translateY(-3px)}
-.guide-body-icon{font-size:2.8rem;margin-bottom:.7rem}
-.guide-body-name{font-family:'Cormorant Garamond',serif;font-size:1.05rem;margin-bottom:.4rem;color:var(--cream)}
-.guide-body-tips{font-size:.7rem;color:var(--muted);line-height:1.65;text-align:left}
-.guide-season-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin:2rem 0}
-@media(max-width:580px){.guide-season-grid{grid-template-columns:1fr}}
-.guide-season-card{border:1px solid var(--border);padding:1.8rem;position:relative;overflow:hidden;transition:transform .25s}
-.guide-season-card:hover{transform:translateY(-3px);border-color:var(--border2)}
-.guide-season-card::after{content:'';position:absolute;inset:0;opacity:.04;pointer-events:none}
-.guide-season-card.summer::after{background:linear-gradient(135deg,#f59e0b,transparent)}
-.guide-season-card.monsoon::after{background:linear-gradient(135deg,#3b82f6,transparent)}
-.guide-season-card.winter::after{background:linear-gradient(135deg,#818cf8,transparent)}
-.guide-season-card.festive::after{background:linear-gradient(135deg,#ec4899,transparent)}
-.guide-season-icon{font-size:2rem;margin-bottom:.8rem}
-.guide-season-name{font-family:'Cormorant Garamond',serif;font-size:1.3rem;margin-bottom:.6rem;color:var(--cream)}
-.guide-season-items{font-size:.78rem;color:var(--muted);line-height:1.9}
+/* ── TOAST ── */
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(80px);background:#111827;border:1px solid var(--border);color:var(--text);padding:11px 22px;border-radius:50px;font-size:13px;font-weight:500;z-index:300;transition:transform 0.3s ease;white-space:nowrap;box-shadow:0 10px 40px rgba(0,0,0,0.6);}
+.toast.show{transform:translateX(-50%) translateY(0);}
+.toast span{color:var(--teal);}
 
-/* ─── QUIZ PAGE ─── */
-#page-quiz{background:var(--ink)}
-.quiz-wrap{max-width:760px;margin:0 auto;padding:6rem 2rem}
-.quiz-step{display:none}
-.quiz-step.active{display:block}
-.quiz-q{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;margin-bottom:.8rem;line-height:1.25}
-.quiz-hint{color:var(--muted);font-size:.85rem;margin-bottom:2.5rem;line-height:1.7}
-.shape-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.2rem;margin-bottom:2rem}
-@media(min-width:600px){.shape-grid{grid-template-columns:repeat(4,1fr)}}
-.shape-option{background:var(--card);border:1px solid var(--border);padding:1.8rem 1rem;text-align:center;cursor:pointer;transition:border-color .25s,background .25s,transform .25s}
-.shape-option:hover{border-color:var(--gold);background:rgba(201,168,76,.05);transform:translateY(-3px)}
-.shape-option.selected{border-color:var(--gold);background:rgba(201,168,76,.1)}
-.shape-icon{font-size:3rem;margin-bottom:.8rem;display:block}
-.shape-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;margin-bottom:.3rem}
-.shape-desc{font-size:.72rem;color:var(--muted);line-height:1.5}
-.style-opts{display:flex;flex-direction:column;gap:.8rem;margin-bottom:2rem}
-.style-opt{background:var(--card);border:1px solid var(--border);padding:1.1rem 1.6rem;cursor:pointer;display:flex;align-items:center;gap:1rem;transition:border-color .25s,background .25s}
-.style-opt:hover{border-color:var(--gold);background:rgba(201,168,76,.05)}
-.style-opt.selected{border-color:var(--gold);background:rgba(201,168,76,.1)}
-.style-opt-icon{font-size:1.5rem;flex-shrink:0}
-.style-opt-text{font-size:.9rem}
-.style-opt-text strong{display:block;font-weight:500;margin-bottom:.1rem}
-.style-opt-text span{color:var(--muted);font-size:.78rem}
-.quiz-progress{display:flex;gap:.4rem;margin-bottom:2.5rem}
-.prog-dot{width:24px;height:2px;background:var(--border);transition:background .3s}
-.prog-dot.done{background:var(--gold)}
-.quiz-nav{display:flex;justify-content:space-between;align-items:center;margin-top:2rem}
-.btn-text{background:none;border:none;color:var(--muted);font-family:'Outfit',sans-serif;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:color .2s}
-.btn-text:hover{color:var(--cream)}
-.result-wrap{text-align:center}
-.result-badge{width:90px;height:90px;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:3rem;margin:0 auto 1.5rem}
-.result-shape{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;color:var(--gold);margin-bottom:.5rem}
-.result-tagline{color:var(--muted);font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1.2rem;margin-bottom:3rem}
-.result-outfits{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1.2rem;text-align:left;margin-bottom:2rem}
-.result-card{background:var(--card);border:1px solid var(--border);padding:1.5rem;transition:border-color .25s,transform .25s}
-.result-card:hover{border-color:var(--gold);transform:translateY(-3px)}
-.result-card-icon{font-size:2.5rem;margin-bottom:.8rem}
-.result-card h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;margin-bottom:.4rem}
-.result-card p{font-size:.78rem;color:var(--muted);line-height:1.6}
+/* ── NO RESULTS ── */
+.no-results{grid-column:1/-1;text-align:center;padding:80px 0;color:var(--muted);font-size:15px;}
 
-/* ─── ACCESSORIES PAGE ─── */
-#page-accessories{background:var(--ink)}
-.acc-filter{display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:3rem}
-.acc-pill{background:none;border:1px solid var(--border);color:var(--muted);padding:.5rem 1.2rem;font-family:'Outfit',sans-serif;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .2s}
-.acc-pill:hover,.acc-pill.active{background:rgba(201,168,76,.1);border-color:var(--gold);color:var(--gold)}
-.acc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1.4rem}
-.acc-card{background:var(--card);border:1px solid var(--border);transition:transform .3s,box-shadow .3s;cursor:pointer;position:relative;overflow:hidden}
-.acc-card:hover{transform:translateY(-5px);box-shadow:0 16px 50px rgba(0,0,0,.4),0 0 0 1px rgba(201,168,76,.2)}
-.acc-card:hover .acc-img{transform:scale(1.06)}
-.acc-visual{width:100%;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:5rem;background:linear-gradient(135deg,var(--surface),var(--card));position:relative;overflow:hidden}
-.acc-visual::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 30%,rgba(201,168,76,.08),transparent 60%)}
-.acc-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
-.acc-icon-fallback{position:relative;z-index:1;pointer-events:none}
-.acc-body{padding:1.2rem}
-.acc-name{font-family:'Cormorant Garamond',serif;font-size:1.15rem;margin-bottom:.3rem}
-.acc-match{font-size:.75rem;color:var(--muted);margin-bottom:.8rem;line-height:1.5}
-.acc-chips{display:flex;flex-wrap:wrap;gap:.4rem}
-.chip{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);border:1px solid var(--border);padding:.15rem .5rem}
-.acc-badge{position:absolute;top:.8rem;left:.8rem;z-index:2;background:var(--gold);color:var(--ink);font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;padding:.25rem .6rem;font-weight:500}
+/* ── DIVIDER ── */
+.divider{height:1px;background:var(--border);margin:0 24px;}
 
-/* ─── COLOUR PICKER ─── */
-#page-colours{background:var(--ink)}
-.colour-layout{display:grid;grid-template-columns:280px 1fr;gap:3rem;align-items:start}
-@media(max-width:900px){.colour-layout{grid-template-columns:1fr}}
-.colour-panel{background:var(--card);border:1px solid var(--border);padding:2rem;position:sticky;top:7rem}
-.colour-panel h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;margin-bottom:1.5rem}
-.colour-section{margin-bottom:1.5rem}
-.colour-section label{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.7rem}
-.swatch-row{display:flex;flex-wrap:wrap;gap:.5rem}
-.swatch{width:28px;height:28px;border-radius:50%;cursor:pointer;transition:transform .2s,box-shadow .2s;border:2px solid transparent}
-.swatch:hover{transform:scale(1.2)}
-.swatch.active{border-color:var(--gold);box-shadow:0 0 0 2px var(--ink),0 0 0 4px var(--gold)}
-.colour-result{min-height:300px}
-.palette-preview{background:var(--card);border:1px solid var(--border);padding:2rem;margin-bottom:2rem}
-.palette-preview h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;margin-bottom:1.2rem}
-.palette-strip{display:flex;gap:.5rem;margin-bottom:1.2rem}
-.palette-swatch{flex:1;height:60px;border:1px solid rgba(255,255,255,.1)}
-.combo-name{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.5rem}
-.combo-desc{font-size:.88rem;color:var(--muted);line-height:1.7}
-.outfit-suggestions-mini{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}
-.mini-outfit{background:var(--card);border:1px solid var(--border);padding:1.2rem}
-.mini-outfit .icon{font-size:1.8rem;margin-bottom:.6rem}
-.mini-outfit h4{font-family:'Cormorant Garamond',serif;font-size:1rem;margin-bottom:.4rem}
-.mini-outfit p{font-size:.78rem;color:var(--muted);line-height:1.6}
-
-/* ─── TREND BOARD ─── */
-#page-trends{background:var(--ink)}
-.trend-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.5rem}
-.trend-card{background:var(--card);border:1px solid var(--border);transition:transform .3s,border-color .3s;overflow:hidden}
-.trend-card:hover{transform:translateY(-4px);border-color:var(--border2)}
-.trend-card:hover .trend-img{transform:scale(1.06)}
-.trend-img-wrap{width:100%;aspect-ratio:16/9;overflow:hidden;position:relative;background:var(--surface)}
-.trend-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
-.trend-card-body{padding:2rem}
-.trend-season{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
-.trend-name{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;margin-bottom:.8rem}
-.trend-desc{font-size:.83rem;color:var(--muted);line-height:1.8;margin-bottom:1.2rem}
-.trend-items{display:flex;flex-wrap:wrap;gap:.4rem}
-.trend-item{font-size:.65rem;letter-spacing:.1em;border:1px solid var(--border);color:var(--cream);padding:.2rem .6rem}
-.trend-heat{display:flex;align-items:center;gap:.5rem;margin-top:1.2rem}
-.heat-label{font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted)}
-.heat-bar{flex:1;height:2px;background:var(--border);position:relative}
-.heat-fill{position:absolute;inset:0;right:auto;background:var(--gold);transition:width .8s ease}
-
-/* ─── SAVED ─── */
-#page-saved{background:var(--ink)}
-.empty-saved{text-align:center;padding:5rem 0;color:var(--muted)}
-.empty-saved .icon{font-size:3rem;margin-bottom:1rem}
-
-/* ─── TOAST ─── */
-.toast{
-  position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);
-  background:var(--card);border:1px solid var(--border2);color:var(--cream);
-  padding:.9rem 2rem;font-size:.78rem;letter-spacing:.08em;
-  z-index:1000;opacity:0;transition:all .3s;pointer-events:none;
-}
-.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-
-/* ─── REVEAL ─── */
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s}
-.reveal.on{opacity:1;transform:none}
-
-/* ─── ANIMATIONS ─── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
-@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-@keyframes spin{to{transform:rotate(360deg)}}
-.spinner{width:20px;height:20px;border:2px solid var(--border);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite;display:inline-block}
-
-/* ─── RESPONSIVE ─── */
-@media(max-width:900px){
-  nav{padding:1rem 1.5rem}
-  .nav-links{gap:1rem}
-  .nav-links button{font-size:.62rem;letter-spacing:.12em}
-  .section-wrap{padding:5rem 1.5rem}
-}
-@media(max-width:680px){
-  nav{padding:.9rem 1rem;flex-wrap:wrap;gap:.5rem;background:rgba(12,11,9,.98)}
-  .nav-logo{font-size:1.2rem}
-  .nav-links{gap:.5rem;flex-wrap:wrap}
-  .nav-links button{font-size:.56rem;letter-spacing:.07em}
-  .section-wrap,.ai-wrap{padding:4.5rem 1rem}
-  .hero-title{font-size:clamp(3.2rem,16vw,12rem)}
-  .hero-stats{gap:1.2rem}
-  .stat-num{font-size:1.5rem}
-  .modal-inner{padding:4rem 1rem}
-  .modal-name{font-size:1.9rem}
-  .outfit-grid{grid-template-columns:repeat(auto-fill,minmax(155px,1fr))}
-  .acc-grid{grid-template-columns:repeat(auto-fill,minmax(155px,1fr))}
-  .guide-chapters{padding:2rem 1rem}
-  .guide-hero-inner{padding:0 1rem}
+/* ── RESPONSIVE ── */
+@media(max-width:640px){
+  header{padding:0 14px;}
+  .search-bar{display:none;}
+  .container{padding:0 12px 60px;gap:13px;}
+  .cart{width:100%;right:-100%;}
+  .ai-panel{width:100%;left:-100%;}
+  .hero{padding:44px 16px 36px;}
+  .outfit-section{padding:28px 14px;}
 }
 </style>
 </head>
 <body>
 
-<div id="toast" class="toast"></div>
-
-<!-- ══════════════════════ NAV ══════════════════════ -->
-<nav>
-  <div class="nav-logo" onclick="go('home')">StyleGalaxy</div>
-  <div class="nav-links">
-    <button id="nav-home" class="active" onclick="go('home')">Home</button>
-    <button id="nav-occasion" onclick="go('occasion')">Outfits</button>
-    <button id="nav-trends" onclick="go('trends')">Trends</button>
-    <button id="nav-quiz" onclick="go('quiz')">Style Quiz</button>
-    <button id="nav-accessories" onclick="go('accessories')">Accessories</button>
-    <button id="nav-colours" onclick="go('colours')">Colours</button>
-    <button id="nav-guide" onclick="go('guide')">Style Guide</button>
-    <button id="nav-saved" onclick="go('saved')">Saved <span id="saved-count"></span></button>
-    <button class="nav-search-btn" onclick="openSearch()" title="Search">🔍</button>
+<!-- ── HEADER ── -->
+<header>
+  <div class="logo">Style<em>Galaxy</em> ✦</div>
+  <div class="search-bar">
+    <span class="s-ico">🔍</span>
+    <input type="text" id="search-input" placeholder="Search products, brands, styles…" oninput="doSearch()">
   </div>
-</nav>
-
-<!-- ══════════════════════ SEARCH OVERLAY ══════════════════════ -->
-<div id="search-overlay">
-  <div class="search-input-wrap">
-    <input id="search-input" type="text" placeholder="Search outfits, styles, occasions…" oninput="doSearch(this.value)"/>
-    <button class="search-close" onclick="closeSearch()">✕</button>
+  <div class="header-right">
+    <button class="ai-btn" onclick="toggleAI()">✨ AI Stylist</button>
+    <button class="cart-btn" onclick="toggleCart()">🛍 Cart <span id="cart-count">0</span></button>
   </div>
-  <div id="search-results"></div>
-</div>
+</header>
 
-<!-- ══════════════════════ OUTFIT DETAIL MODAL ══════════════════════ -->
-<div id="outfit-modal">
-  <button class="modal-close" onclick="closeModal()">✕</button>
-  <div class="modal-inner" id="modal-inner"></div>
-</div>
-
-<!-- ══════════════════════ HOME ══════════════════════ -->
-<div id="page-home" class="page active">
-  <div class="hero-bg-text">STYLE</div>
-  <div class="hero-content">
-    <p class="hero-eyebrow">Curated · Personal · Refined</p>
-    <h1 class="hero-title">Style<em>Galaxy</em></h1>
-    <p class="hero-sub">Where fashion finds its constellation</p>
-    <div class="hero-divider"></div>
-    <div class="hero-actions">
-      <button class="btn-gold" onclick="go('occasion')">Explore Outfits</button>
-      <button class="btn-outline" onclick="go('quiz')">Take Style Quiz</button>
-      <button class="btn-outline" onclick="go('guide')">✦ Style Guide</button>
-    </div>
-    <div class="hero-stats">
-      <div class="stat"><div class="stat-num">24+</div><div class="stat-label">Curated Outfits</div></div>
-      <div class="stat"><div class="stat-num">5</div><div class="stat-label">Occasions</div></div>
-      <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Combinations</div></div>
-    </div>
+<!-- ── HERO ── -->
+<div class="hero">
+  <h1>Style Galaxy<br><em>Where fashion finds its constellation</em></h1>
+  <p>Get AI-powered outfit recommendations tailored to your body, skin tone, and personal style.</p>
+  <div class="hero-tags">
+    <div class="hero-tag"><span>✨</span>AI Outfit Matching</div>
+    <div class="hero-tag"><span>🎨</span>Skin Tone Advisor</div>
+    <div class="hero-tag"><span>👗</span>50+ Curated Styles</div>
+    <div class="hero-tag"><span>🚚</span>Free Delivery</div>
   </div>
 </div>
 
-<!-- ══════════════════════ OCCASIONS ══════════════════════ -->
-<div id="page-occasion" class="page">
-  <div class="section-wrap">
-    <div class="section-header reveal">
-      <p class="sec-tag">Dressed for Every Moment</p>
-      <h2 class="sec-title">Occasion <em>Outfits</em></h2>
-      <p class="sec-sub">Curated looks for every chapter of your day — from campus to cocktails.</p>
-    </div>
-    <div class="gender-toggle reveal">
-      <button class="g-btn active" id="gbtn-women" onclick="switchGender('women',this)"><span class="g-icon">♀</span>Women</button>
-      <button class="g-btn" id="gbtn-men" onclick="switchGender('men',this)"><span class="g-icon">♂</span>Men</button>
-    </div>
-    <div class="occasion-tabs reveal" id="occ-tabs">
-      <button class="occ-tab active" onclick="renderOutfits('all',this)">All</button>
-      <button class="occ-tab" onclick="renderOutfits('casual',this)">Casual</button>
-      <button class="occ-tab" onclick="renderOutfits('office',this)">Office</button>
-      <button class="occ-tab" onclick="renderOutfits('ethnic',this)">Ethnic</button>
-      <button class="occ-tab" onclick="renderOutfits('college',this)">College</button>
-      <button class="occ-tab" onclick="renderOutfits('evening',this)">Evening</button>
-    </div>
-    <div class="outfit-grid" id="outfit-grid"></div>
+<!-- ── FILTER SECTION ── -->
+<div class="filter-section">
+  <div class="filter-row" id="category-pills">
+    <div class="pill active" onclick="setCategory('All',this)">All</div>
+    <div class="pill" onclick="setCategory('Men',this)">👔 Men</div>
+    <div class="pill" onclick="setCategory('Women',this)">👗 Women</div>
+    <div class="pill" onclick="setCategory('Ethnic Wear',this)">🪔 Ethnic</div>
+    <div class="pill" onclick="setCategory('Western Wear',this)">🌟 Western</div>
+    <div class="pill" onclick="setCategory('Accessories',this)">👜 Accessories</div>
+    <div class="pill" onclick="setCategory('Jewelry',this)">💍 Jewelry</div>
+  </div>
+  <div class="adv-filters">
+    <select class="filter-select" onchange="setOccasion(this.value)">
+      <option value="">🎯 Occasion</option>
+      <option value="College">College</option>
+      <option value="Office">Office</option>
+      <option value="Party">Party</option>
+      <option value="Wedding">Wedding</option>
+      <option value="Casual">Casual</option>
+    </select>
+    <select class="filter-select" onchange="setColor(this.value)">
+      <option value="">🎨 Color</option>
+      <option value="White">White</option>
+      <option value="Black">Black</option>
+      <option value="Blue">Blue</option>
+      <option value="Red">Red</option>
+      <option value="Pink">Pink</option>
+      <option value="Green">Green</option>
+      <option value="Beige">Beige</option>
+      <option value="Gold">Gold</option>
+    </select>
+    <select class="filter-select" onchange="setPriceRange(this.value)">
+      <option value="">💰 Price Range</option>
+      <option value="0-1000">Under ₹1,000</option>
+      <option value="1000-3000">₹1,000 – ₹3,000</option>
+      <option value="3000-7000">₹3,000 – ₹7,000</option>
+      <option value="7000-99999">Above ₹7,000</option>
+    </select>
   </div>
 </div>
 
-<!-- ══════════════════════ TRENDS ══════════════════════ -->
-<div id="page-trends" class="page">
-  <div class="section-wrap">
-    <div class="section-header reveal">
-      <p class="sec-tag">What's In Now</p>
-      <h2 class="sec-title">Trend <em>Board</em></h2>
-      <p class="sec-sub">The styles defining the current season — translated for your wardrobe.</p>
-    </div>
-    <div class="trend-grid reveal" id="trend-grid"></div>
-  </div>
+<!-- ── GRID HEADER ── -->
+<div class="grid-header">
+  <span id="count-label">Loading products…</span>
+  <select class="sort-select" onchange="sortProducts(this.value)">
+    <option value="default">Sort: Featured</option>
+    <option value="price-low">Price: Low → High</option>
+    <option value="price-high">Price: High → Low</option>
+    <option value="rating">Top Rated</option>
+    <option value="discount">Best Discount</option>
+  </select>
 </div>
 
-<!-- ══════════════════════ QUIZ ══════════════════════ -->
-<div id="page-quiz" class="page">
-  <div class="quiz-wrap">
-    <div class="quiz-progress" id="quiz-progress">
-      <div class="prog-dot done"></div>
-      <div class="prog-dot"></div>
-      <div class="prog-dot"></div>
-      <div class="prog-dot"></div>
-    </div>
-    <div class="quiz-step active" id="qs1">
-      <h3 class="quiz-q">What's your body shape?</h3>
-      <p class="quiz-hint">Select your gender to see body shapes and outfit recommendations tailored to you.</p>
-      <div style="display:flex;gap:1rem;margin-bottom:2rem">
-        <div class="shape-option" style="flex:1;padding:1.4rem 1rem" onclick="selectQuizGender('women',this)">
-          <span class="shape-icon">♀</span>
-          <div class="shape-name">Women</div>
-          <div class="shape-desc">Womenswear & styling</div>
-        </div>
-        <div class="shape-option" style="flex:1;padding:1.4rem 1rem" onclick="selectQuizGender('men',this)">
-          <span class="shape-icon">♂</span>
-          <div class="shape-name">Men</div>
-          <div class="shape-desc">Menswear & styling</div>
-        </div>
-      </div>
-      <div id="women-shapes">
-        <p style="font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem">Your Body Shape</p>
-        <div class="shape-grid">
-          <div class="shape-option" onclick="selectShape('hourglass',this)"><span class="shape-icon">⌛</span><div class="shape-name">Hourglass</div><div class="shape-desc">Balanced bust & hips, defined waist</div></div>
-          <div class="shape-option" onclick="selectShape('pear',this)"><span class="shape-icon">🍐</span><div class="shape-name">Pear</div><div class="shape-desc">Hips wider than shoulders</div></div>
-          <div class="shape-option" onclick="selectShape('apple',this)"><span class="shape-icon">🍎</span><div class="shape-name">Apple</div><div class="shape-desc">Fuller midsection, slim legs</div></div>
-          <div class="shape-option" onclick="selectShape('rectangle',this)"><span class="shape-icon">▭</span><div class="shape-name">Rectangle</div><div class="shape-desc">Shoulders, waist & hips align</div></div>
-        </div>
-      </div>
-      <div id="men-shapes" style="display:none">
-        <p style="font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem">Your Body Type</p>
-        <div class="shape-grid">
-          <div class="shape-option" onclick="selectShape('athletic',this)"><span class="shape-icon">🏋️</span><div class="shape-name">Athletic</div><div class="shape-desc">Broad shoulders, V-taper</div></div>
-          <div class="shape-option" onclick="selectShape('slim',this)"><span class="shape-icon">🪄</span><div class="shape-name">Slim</div><div class="shape-desc">Lean, narrow frame, long limbs</div></div>
-          <div class="shape-option" onclick="selectShape('stocky',this)"><span class="shape-icon">🪨</span><div class="shape-name">Stocky</div><div class="shape-desc">Broad, compact build</div></div>
-          <div class="shape-option" onclick="selectShape('tall',this)"><span class="shape-icon">📏</span><div class="shape-name">Tall</div><div class="shape-desc">Long proportions</div></div>
-        </div>
-      </div>
-      <div class="quiz-nav"><span></span><button class="btn-gold" onclick="quizNext(2)" id="q1-next" disabled style="opacity:.4">Next →</button></div>
-    </div>
+<!-- ── PRODUCT GRID ── -->
+<div class="container" id="products"></div>
 
-    <div class="quiz-step" id="qs2">
-      <h3 class="quiz-q">What's your preferred style?</h3>
-      <p class="quiz-hint">Your personal aesthetic guides the kinds of outfits we'll curate for you.</p>
-      <div class="style-opts">
-        <div class="style-opt" onclick="selectStyle('minimal',this)"><div class="style-opt-icon">🖤</div><div class="style-opt-text"><strong>Minimal & Clean</strong><span>Neutral tones, structured cuts, less is more</span></div></div>
-        <div class="style-opt" onclick="selectStyle('bold',this)"><div class="style-opt-icon">🔥</div><div class="style-opt-text"><strong>Bold & Statement</strong><span>Prints, colours, eye-catching silhouettes</span></div></div>
-        <div class="style-opt" onclick="selectStyle('classic',this)"><div class="style-opt-icon">🥂</div><div class="style-opt-text"><strong>Classic & Elegant</strong><span>Timeless pieces, refined fabrics, polished looks</span></div></div>
-        <div class="style-opt" onclick="selectStyle('casual',this)"><div class="style-opt-icon">☀️</div><div class="style-opt-text"><strong>Casual & Relaxed</strong><span>Comfortable, effortless everyday dressing</span></div></div>
-      </div>
-      <div class="quiz-nav"><button class="btn-text" onclick="quizNext(1)">← Back</button><button class="btn-gold" onclick="quizNext(3)" id="q2-next" disabled style="opacity:.4">Next →</button></div>
-    </div>
+<div class="divider"></div>
 
-    <div class="quiz-step" id="qs3">
-      <h3 class="quiz-q">Where do you dress most often?</h3>
-      <p class="quiz-hint">We'll weight your suggestions toward outfits that suit your day-to-day life.</p>
-      <div class="style-opts">
-        <div class="style-opt" onclick="selectOcc2('college',this)"><div class="style-opt-icon">🎓</div><div class="style-opt-text"><strong>College / University</strong><span>Trendy, youthful, comfortable for long days</span></div></div>
-        <div class="style-opt" onclick="selectOcc2('office',this)"><div class="style-opt-icon">💼</div><div class="style-opt-text"><strong>Office / Work</strong><span>Professional, polished, confidence-first</span></div></div>
-        <div class="style-opt" onclick="selectOcc2('ethnic',this)"><div class="style-opt-icon">🪷</div><div class="style-opt-text"><strong>Ethnic & Festive</strong><span>Celebrations, weddings, cultural events</span></div></div>
-        <div class="style-opt" onclick="selectOcc2('evening',this)"><div class="style-opt-icon">🌙</div><div class="style-opt-text"><strong>Evening & Social</strong><span>Dinners, parties, occasions that call for drama</span></div></div>
-      </div>
-      <div class="quiz-nav"><button class="btn-text" onclick="quizNext(2)">← Back</button><button class="btn-gold" onclick="showResult()" id="q3-next" disabled style="opacity:.4">See My Results →</button></div>
-    </div>
-
-    <div class="quiz-step" id="qs-result">
-      <div class="result-wrap" id="result-content"></div>
-    </div>
+<!-- ── OUTFIT RECOMMENDER SECTION ── -->
+<div class="outfit-section" id="outfit-section">
+  <div class="section-title">Complete the Look</div>
+  <div class="section-sub">Curated outfit combinations for every occasion</div>
+  <div class="occasion-tabs">
+    <div class="occ-tab active" onclick="setOccasionCombo('All',this)">All</div>
+    <div class="occ-tab" onclick="setOccasionCombo('College',this)">College</div>
+    <div class="occ-tab" onclick="setOccasionCombo('Office',this)">Office</div>
+    <div class="occ-tab" onclick="setOccasionCombo('Party',this)">Party</div>
+    <div class="occ-tab" onclick="setOccasionCombo('Wedding',this)">Wedding</div>
   </div>
+  <div class="outfit-grid" id="outfit-combos"></div>
 </div>
 
-<!-- ══════════════════════ ACCESSORIES ══════════════════════ -->
-<div id="page-accessories" class="page">
-  <div class="section-wrap">
-    <div class="section-header reveal">
-      <p class="sec-tag">Complete Your Look</p>
-      <h2 class="sec-title">The Right <em>Accessories</em></h2>
-      <p class="sec-sub">Every outfit is only as good as its finishing touches.</p>
+<!-- ── AI STYLE PANEL ── -->
+<div class="ai-overlay" id="ai-overlay" onclick="toggleAI()"></div>
+<div class="ai-panel" id="ai-panel">
+  <div class="ai-panel-header">
+    <div>
+      <h2>✨ AI Style Advisor</h2>
+      <p>Get personalized outfit recommendations</p>
     </div>
-    <div class="acc-filter reveal">
-      <button class="acc-pill active" onclick="filterAcc('all',this)">All</button>
-      <button class="acc-pill" onclick="filterAcc('bags',this)">Bags</button>
-      <button class="acc-pill" onclick="filterAcc('jewellery',this)">Jewellery</button>
-      <button class="acc-pill" onclick="filterAcc('shoes',this)">Shoes</button>
-      <button class="acc-pill" onclick="filterAcc('scarves',this)">Scarves & Belts</button>
-      <button class="acc-pill" onclick="filterAcc('watches',this)">Watches</button>
-    </div>
-    <div class="acc-grid" id="acc-grid"></div>
+    <button class="close-ai" onclick="toggleAI()">✕</button>
   </div>
-</div>
-
-<!-- ══════════════════════ COLOUR COMBINATIONS ══════════════════════ -->
-<div id="page-colours" class="page">
-  <div class="section-wrap">
-    <div class="section-header reveal">
-      <p class="sec-tag">Colour Combinations</p>
-      <h2 class="sec-title">Build Your <em>Palette</em></h2>
-      <p class="sec-sub">Pick your colours and see what combinations work — with outfit suggestions to match.</p>
+  <div class="ai-body">
+    <!-- AVATAR PREVIEW -->
+    <div class="avatar-wrap">
+      <div class="avatar-title">Your Style Avatar</div>
+      <svg class="avatar-svg" id="avatar-svg" width="110" height="180" viewBox="0 0 110 180">
+        <!-- Body -->
+        <ellipse id="av-body" cx="55" cy="125" rx="28" ry="38" fill="#c9a84c" opacity="0.3"/>
+        <!-- Head -->
+        <ellipse id="av-head" cx="55" cy="60" rx="22" ry="24" fill="#e8c49a"/>
+        <!-- Hair -->
+        <g id="av-hair">
+          <ellipse cx="55" cy="42" rx="22" ry="10" fill="#4a2c2a"/>
+          <ellipse cx="33" cy="58" rx="8" ry="16" fill="#4a2c2a"/>
+          <ellipse cx="77" cy="58" rx="8" ry="16" fill="#4a2c2a"/>
+        </g>
+        <!-- Face features -->
+        <ellipse cx="47" cy="62" rx="3" ry="3.5" fill="#6b3a2a" opacity="0.8"/>
+        <ellipse cx="63" cy="62" rx="3" ry="3.5" fill="#6b3a2a" opacity="0.8"/>
+        <path d="M48 72 Q55 78 62 72" stroke="#c0604a" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <!-- Outfit -->
+        <rect id="av-top" x="34" y="84" width="42" height="40" rx="4" fill="#c9a84c" opacity="0.7"/>
+        <rect id="av-bottom" x="36" y="124" width="38" height="42" rx="4" fill="#4a5568" opacity="0.8"/>
+        <!-- Accessories -->
+        <circle id="av-accessory" cx="55" cy="90" r="4" fill="#d4af37" opacity="0" id="av-necklace"/>
+      </svg>
     </div>
-    <div class="colour-layout">
-      <div class="colour-panel reveal">
-        <h3>Pick Your Colours</h3>
-        <div class="colour-section"><label>Base / Top Colour</label><div class="swatch-row" id="base-swatches"></div></div>
-        <div class="colour-section"><label>Bottom / Second Colour</label><div class="swatch-row" id="bottom-swatches"></div></div>
-        <div class="colour-section"><label>Accent / Detail</label><div class="swatch-row" id="accent-swatches"></div></div>
-        <button class="btn-gold" style="width:100%;margin-top:.5rem" onclick="buildPalette()">Generate Combinations</button>
-      </div>
-      <div class="colour-result reveal" id="colour-result">
-        <div style="display:flex;align-items:center;justify-content:center;height:300px;color:var(--muted);font-style:italic;font-family:'Cormorant Garamond',serif;font-size:1.3rem">Select your colours to see combinations →</div>
+
+    <!-- BODY SHAPE -->
+    <div class="ai-section">
+      <div class="ai-section-title">👤 Body Shape</div>
+      <div class="option-grid">
+        <div class="option-btn" onclick="selectOpt(this,'body','Pear')"><span>🍐</span>Pear</div>
+        <div class="option-btn" onclick="selectOpt(this,'body','Apple')"><span>🍎</span>Apple</div>
+        <div class="option-btn" onclick="selectOpt(this,'body','Hourglass')"><span>⌛</span>Hourglass</div>
+        <div class="option-btn" onclick="selectOpt(this,'body','Rectangle')"><span>▭</span>Rectangle</div>
+        <div class="option-btn" onclick="selectOpt(this,'body','Inverted Triangle')"><span>🔺</span>Inv. Triangle</div>
+        <div class="option-btn" onclick="selectOpt(this,'body','Petite')"><span>🌸</span>Petite</div>
       </div>
     </div>
-  </div>
-</div>
 
-<!-- ══════════════════════ STYLE GUIDE ══════════════════════ -->
-<div id="page-guide" class="page">
-  <div class="guide-hero">
-    <div class="guide-hero-inner reveal">
-      <p class="sec-tag">The StyleGalaxy Edit</p>
-      <h2 class="sec-title" style="font-size:clamp(2.8rem,6vw,5rem)">The Complete <em>Style Guide</em></h2>
-      <p class="sec-sub" style="max-width:600px;margin-top:1rem">Everything you need to dress well — the rules, the palettes, the seasonal essentials, and the body-type wisdom curated for the Indian wardrobe.</p>
+    <!-- FACE SHAPE -->
+    <div class="ai-section">
+      <div class="ai-section-title">😊 Face Shape</div>
+      <div class="option-grid">
+        <div class="option-btn" onclick="selectOpt(this,'face','Round')"><span>🟤</span>Round</div>
+        <div class="option-btn" onclick="selectOpt(this,'face','Oval')"><span>🥚</span>Oval</div>
+        <div class="option-btn" onclick="selectOpt(this,'face','Square')"><span>⬜</span>Square</div>
+        <div class="option-btn" onclick="selectOpt(this,'face','Heart')"><span>❤️</span>Heart</div>
+        <div class="option-btn" onclick="selectOpt(this,'face','Diamond')"><span>💎</span>Diamond</div>
+        <div class="option-btn" onclick="selectOpt(this,'face','Oblong')"><span>🫙</span>Oblong</div>
+      </div>
     </div>
-  </div>
-  <div class="guide-chapters">
-    <!-- TOC -->
-    <div class="guide-toc reveal">
-      <div class="guide-toc-title">Chapters</div>
-      <span class="guide-toc-link active" onclick="scrollToGuide('rule-of-three')">The Rule of Three</span>
-      <span class="guide-toc-link" onclick="scrollToGuide('colour-theory')">Colour Theory</span>
-      <span class="guide-toc-link" onclick="scrollToGuide('body-dressing')">Dressing Your Body</span>
-      <span class="guide-toc-link" onclick="scrollToGuide('seasonal')">Seasonal Essentials</span>
-      <span class="guide-toc-link" onclick="scrollToGuide('capsule')">The Capsule Wardrobe</span>
-      <span class="guide-toc-link" onclick="scrollToGuide('occasion-codes')">Occasion Codes</span>
+
+    <!-- SKIN TONE -->
+    <div class="ai-section">
+      <div class="ai-section-title">🎨 Skin Tone</div>
+      <div class="skin-row">
+        <div class="skin-wrap">
+          <div class="skin-btn" style="background:#f5d5b0;" onclick="selectSkin(this,'Fair')">Fair</div>
+        </div>
+        <div class="skin-wrap">
+          <div class="skin-btn" style="background:#d4a574;" onclick="selectSkin(this,'Wheatish')">Wht</div>
+        </div>
+        <div class="skin-wrap">
+          <div class="skin-btn" style="background:#b8753a;" onclick="selectSkin(this,'Medium')">Med</div>
+        </div>
+        <div class="skin-wrap">
+          <div class="skin-btn" style="background:#8b5e3c;" onclick="selectSkin(this,'Olive')">Olv</div>
+        </div>
+        <div class="skin-wrap">
+          <div class="skin-btn" style="background:#6b3a1f;" onclick="selectSkin(this,'Dark')">Dark</div>
+        </div>
+        <div class="skin-wrap">
+          <div class="skin-btn" style="background:#3d1f0e;" onclick="selectSkin(this,'Deep')">Deep</div>
+        </div>
+      </div>
     </div>
-    <!-- Articles -->
-    <div class="guide-articles">
 
-      <!-- 1. Rule of Three -->
-      <div class="guide-article reveal" id="guide-rule-of-three">
-        <p class="guide-article-tag">Chapter 01</p>
-        <h3 class="guide-article-title">The Rule of <em>Three</em></h3>
-        <p class="guide-article-lead">Every great outfit can be broken into three elements. Master this framework and you will never leave the house second-guessing yourself again.</p>
-        <div class="guide-article-body">
-          <p>The rule of three states that a well-dressed person never has more than three focal points — a <strong>hero piece</strong>, a <strong>supporting element</strong>, and a <strong>detail</strong>. Everything else fades into the background intentionally.</p>
-          <p>Think of it as the 60-30-10 rule applied to attention: 60% of what people notice should be your main garment, 30% a secondary layer or colour, and 10% the finishing touch — a cuff, a clutch, a single statement earring.</p>
-        </div>
-        <div class="guide-rule-grid">
-          <div class="guide-rule"><div class="guide-rule-num">01</div><div class="guide-rule-title">One Hero Piece</div><div class="guide-rule-text">Let one item own the look. A structured blazer, a printed saree, a sculpted midi dress — pick one and let it lead.</div></div>
-          <div class="guide-rule"><div class="guide-rule-num">02</div><div class="guide-rule-title">One Supporting Element</div><div class="guide-rule-text">This balances the hero without competing. A tonal trouser, a simple blouse, a clean turtleneck underneath.</div></div>
-          <div class="guide-rule"><div class="guide-rule-num">03</div><div class="guide-rule-title">One Precise Detail</div><div class="guide-rule-text">The finisher. A bold earring, a contrasting belt, a textured bag. This is where personality lives.</div></div>
-          <div class="guide-rule"><div class="guide-rule-num">04</div><div class="guide-rule-title">Everything Else: Quiet</div><div class="guide-rule-text">Shoes, hosiery, inner wear — these should not compete. Neutral, clean, invisible. The supporting cast.</div></div>
-        </div>
-        <div class="guide-tip-box">
-          <div class="guide-tip-label">Editor's Tip</div>
-          <div class="guide-tip-text">When an outfit feels "off," the culprit is almost always too many focal points. Remove one thing before you add another. Subtraction is a styling skill.</div>
-        </div>
+    <!-- HAIR STYLE -->
+    <div class="ai-section">
+      <div class="ai-section-title">💇 Hairstyle</div>
+      <div class="option-grid">
+        <div class="option-btn" onclick="selectOpt(this,'hair','Short');updateAvatarHair('Short')"><span>✂️</span>Short</div>
+        <div class="option-btn" onclick="selectOpt(this,'hair','Long');updateAvatarHair('Long')"><span>💁</span>Long</div>
+        <div class="option-btn" onclick="selectOpt(this,'hair','Curly');updateAvatarHair('Curly')"><span>🌀</span>Curly</div>
+        <div class="option-btn" onclick="selectOpt(this,'hair','Bun');updateAvatarHair('Bun')"><span>🪮</span>Bun</div>
+        <div class="option-btn" onclick="selectOpt(this,'hair','Straight');updateAvatarHair('Straight')"><span>〰️</span>Straight</div>
+        <div class="option-btn" onclick="selectOpt(this,'hair','Ponytail');updateAvatarHair('Ponytail')"><span>🎀</span>Ponytail</div>
       </div>
+    </div>
 
-      <!-- 2. Colour Theory -->
-      <div class="guide-article reveal" id="guide-colour-theory">
-        <p class="guide-article-tag">Chapter 02</p>
-        <h3 class="guide-article-title">Colour <em>Theory</em> for the Real Wardrobe</h3>
-        <p class="guide-article-lead">Colour is the most powerful tool in fashion — and the most misunderstood. Here are the palettes that consistently work across Indian skin tones and occasions.</p>
-        <div class="guide-article-body">
-          <p>Indian skin tones range from deep mahogany to warm wheat to cool ivory — and that range is a gift. The warm undertones in South Asian complexions allow colours that would wash out other palettes to absolutely sing.</p>
-          <p><strong>Jewel tones</strong> — emerald, ruby, sapphire, amethyst — are universally flattering across the full spectrum of South Asian skin. They carry richness without needing contrast. <strong>Earth tones</strong> — terracotta, sand, olive, rust — pair beautifully with warm-undertoned complexions and feel effortlessly grounded.</p>
-        </div>
-        <div class="guide-palette-row">
-          <div class="guide-palette-card"><div class="guide-palette-swatches"><span style="background:#1a4a2e"></span><span style="background:#c9a84c"></span><span style="background:#f0ead8"></span></div><div class="guide-palette-info"><div class="guide-palette-name">Forest & Gold</div><div class="guide-palette-desc">Deep green anchors, gold activates. For festive and formal occasions.</div></div></div>
-          <div class="guide-palette-card"><div class="guide-palette-swatches"><span style="background:#8b2635"></span><span style="background:#2c1810"></span><span style="background:#d4a57a"></span></div><div class="guide-palette-info"><div class="guide-palette-name">Ruby & Earth</div><div class="guide-palette-desc">A jewel tone with warm neutrals. Day-to-evening versatility.</div></div></div>
-          <div class="guide-palette-card"><div class="guide-palette-swatches"><span style="background:#c17b40"></span><span style="background:#f0e6d3"></span><span style="background:#4a3728"></span></div><div class="guide-palette-info"><div class="guide-palette-name">Terracotta & Ivory</div><div class="guide-palette-desc">The warm minimal palette. Photographs beautifully outdoors.</div></div></div>
-          <div class="guide-palette-card"><div class="guide-palette-swatches"><span style="background:#1c3461"></span><span style="background:#c0c7d4"></span><span style="background:#e8c97a"></span></div><div class="guide-palette-info"><div class="guide-palette-name">Navy & Champagne</div><div class="guide-palette-desc">Classic and elevated. The safest dressy combination.</div></div></div>
-        </div>
-        <div class="guide-tip-box">
-          <div class="guide-tip-label">The Contrast Rule</div>
-          <div class="guide-tip-text">Lighter skin tones can wear deep jewels as neutrals. Deeper skin tones can wear pastels as statement colours. The rule is always: if the colour fights your skin, it's working against you — not for you.</div>
-        </div>
+    <!-- STYLE PREFERENCE -->
+    <div class="ai-section">
+      <div class="ai-section-title">👗 Style Preference</div>
+      <div class="option-grid cols2">
+        <div class="option-btn" onclick="selectOpt(this,'style','Ethnic')"><span>🪔</span>Ethnic</div>
+        <div class="option-btn" onclick="selectOpt(this,'style','Casual')"><span>👕</span>Casual</div>
+        <div class="option-btn" onclick="selectOpt(this,'style','Formal')"><span>👔</span>Formal</div>
+        <div class="option-btn" onclick="selectOpt(this,'style','Party')"><span>🎉</span>Party</div>
       </div>
+    </div>
 
-      <!-- 3. Body Dressing -->
-      <div class="guide-article reveal" id="guide-body-dressing">
-        <p class="guide-article-tag">Chapter 03</p>
-        <h3 class="guide-article-title">Dressing <em>Your Body</em></h3>
-        <p class="guide-article-lead">The goal is never to disguise — it's to dress with intention. Here is how to work with your silhouette, not against it.</p>
-        <div class="guide-body-grid">
-          <div class="guide-body-card"><div class="guide-body-icon">⌛</div><div class="guide-body-name">Hourglass</div><div class="guide-body-tips">• Wrap silhouettes and belted waists<br>• Fitted blazers and tailored trousers<br>• Avoid boxy or shapeless cuts<br>• Highlight your natural waist always</div></div>
-          <div class="guide-body-card"><div class="guide-body-icon">🍐</div><div class="guide-body-name">Pear</div><div class="guide-body-tips">• Statement tops draw the eye upward<br>• A-line and flared skirts balance hips<br>• Avoid clingy fabric below the waist<br>• Wide-leg trousers create proportion</div></div>
-          <div class="guide-body-card"><div class="guide-body-icon">🔺</div><div class="guide-body-name">Inverted Triangle</div><div class="guide-body-tips">• Volume at the hip and thigh<br>• Peplum and ruffled tops work well<br>• V-necks elongate the shoulder line<br>• Wide-leg or flared bottoms balance</div></div>
-          <div class="guide-body-card"><div class="guide-body-icon">▭</div><div class="guide-body-name">Rectangle</div><div class="guide-body-tips">• Create curves with ruching & draping<br>• Belted looks define the waist<br>• Peplums and wrap dresses are ideal<br>• Layering adds visual dimension</div></div>
-          <div class="guide-body-card"><div class="guide-body-icon">🫙</div><div class="guide-body-name">Apple / Round</div><div class="guide-body-tips">• Empire waist and flowy silhouettes<br>• Elongate with vertical details<br>• Structured fabrics skim beautifully<br>• Monochrome dressing lengthens</div></div>
-        </div>
-        <div class="guide-article-body">
-          <p><strong>The saree advantage:</strong> The saree is one of the most universally flattering garments in existence. The drape can be adjusted for every body type — a strategically pleated pallu widens narrow shoulders, a tucked pleat elongates the torso. This is six metres of pure styling flexibility.</p>
-        </div>
-      </div>
+    <button class="ai-generate-btn" onclick="generateRecommendations()">✨ Get My Recommendations</button>
 
-      <!-- 4. Seasonal -->
-      <div class="guide-article reveal" id="guide-seasonal">
-        <p class="guide-article-tag">Chapter 04</p>
-        <h3 class="guide-article-title">Seasonal <em>Essentials</em></h3>
-        <p class="guide-article-lead">India's climate is not a single story. From Bangalore's eternal spring to Mumbai's dramatic monsoon — dressing seasonally is dressing smartly.</p>
-        <div class="guide-season-grid">
-          <div class="guide-season-card summer"><div class="guide-season-icon">☀️</div><div class="guide-season-name">Summer</div><div class="guide-season-items">Linen sets · Cotton kurtas · Breezy midi dresses · Espadrilles · Raffia bags · Lightweight dupattas · Breathable co-ords · Chambray shirts</div></div>
-          <div class="guide-season-card monsoon"><div class="guide-season-icon">🌧️</div><div class="guide-season-name">Monsoon</div><div class="guide-season-items">Dark denim · Synthetic fabrics · Rubber-soled footwear · Quick-dry kurtas · Minimal accessories · Deep jewel tones · Compact crossbody bags</div></div>
-          <div class="guide-season-card winter"><div class="guide-season-icon">🧣</div><div class="guide-season-name">Winter</div><div class="guide-season-items">Wool blazers · Pashmina shawls · Layered kurta sets · Structured coats · Ankle boots · Turtleneck inner wear · Rich earth tones</div></div>
-          <div class="guide-season-card festive"><div class="guide-season-icon">✨</div><div class="guide-season-name">Festive</div><div class="guide-season-items">Silk sarees · Embroidered lehengas · Chanderi suits · Gold jewellery · Kolhapuri chappals · Potli bags · Embellished footwear</div></div>
-        </div>
-        <div class="guide-tip-box">
-          <div class="guide-tip-label">Climate Intelligence</div>
-          <div class="guide-tip-text">In cities like Bangalore and Pune where temperatures rarely extremes, invest in fabrics that work across seasons — cotton-silk blends, light wools, and structured linens are your year-round allies.</div>
-        </div>
-      </div>
-
-      <!-- 5. Capsule -->
-      <div class="guide-article reveal" id="guide-capsule">
-        <p class="guide-article-tag">Chapter 05</p>
-        <h3 class="guide-article-title">The <em>Capsule</em> Wardrobe</h3>
-        <p class="guide-article-lead">Forty outfits from fifteen pieces. The capsule wardrobe is not minimalism for the sake of it — it's a strategic approach to effortless dressing every single day.</p>
-        <div class="guide-article-body">
-          <p>A capsule wardrobe works because every piece is chosen to work with every other piece. There is no such thing as an outfit that "doesn't go with anything" in a well-built capsule — because everything goes with everything.</p>
-          <p><strong>The Indian Capsule:</strong> Start with three neutral kurtas (ivory, stone, charcoal) and two straight-cut palazzos. Add a Kanjivaram or printed saree, a structured blazer, two premium jeans (one slim, one barrel), three fitted tops, a maxi dress, and a statement co-ord set. Fifteen pieces, endless combinations.</p>
-        </div>
-        <div class="guide-rule-grid">
-          <div class="guide-rule"><div class="guide-rule-num">⬜</div><div class="guide-rule-title">Neutrals First</div><div class="guide-rule-text">Build 70% of your capsule in ivory, stone, white, navy, and black. These are the mortar between your statement bricks.</div></div>
-          <div class="guide-rule"><div class="guide-rule-num">🎨</div><div class="guide-rule-title">Two Statement Pieces</div><div class="guide-rule-text">Allow yourself two pieces that are unapologetically you — a print, a colour, a silhouette that makes you feel like yourself.</div></div>
-          <div class="guide-rule"><div class="guide-rule-num">👡</div><div class="guide-rule-title">Three Shoe Rule</div><div class="guide-rule-text">A neutral flat, a heeled option, and a casual sneaker. These three go with everything in a well-built capsule.</div></div>
-          <div class="guide-rule"><div class="guide-rule-num">💰</div><div class="guide-rule-title">Invest in Basics</div><div class="guide-rule-text">Spend more on the pieces worn most — a quality blazer, good denim, a silk blouse. Save on trend pieces with a short shelf life.</div></div>
-        </div>
-      </div>
-
-      <!-- 6. Occasion Codes -->
-      <div class="guide-article reveal" id="guide-occasion-codes">
-        <p class="guide-article-tag">Chapter 06</p>
-        <h3 class="guide-article-title">Cracking Occasion <em>Codes</em></h3>
-        <p class="guide-article-lead">Every invitation has a dress code — written or unwritten. Here is how to read the room before you even arrive.</p>
-        <div class="guide-rule-grid">
-          <div class="guide-rule"><div class="guide-rule-num">💼</div><div class="guide-rule-title">Business Formal</div><div class="guide-rule-text">Tailored suits, crisp shirts, structured dresses. Jewellery is minimal and precise. Shoes are closed-toe and polished.</div></div>
-          <div class="guide-rule"><div class="guide-rule-num">🥂</div><div class="guide-rule-title">Cocktail / Smart Casual</div><div class="guide-rule-text">A midi dress, a blazer-trouser set, or an elevated kurta. Heels or smart flats. This is your most versatile category.</div></div>
-          <div class="guide-rule"><div class="guide-rule-num">🪷</div><div class="guide-rule-title">Wedding Guest</div><div class="guide-rule-text">Lehenga, saree, or a statement anarkali. Avoid white and red (reserved for bride). Go one shade bolder than you think.</div></div>
-          <div class="guide-rule"><div class="guide-rule-num">🎓</div><div class="guide-rule-title">Smart Casual</div><div class="guide-rule-text">Good jeans, a structured top or kurta. Clean sneakers or loafers. The goal is "put-together effortlessness" — not trying too hard or too little.</div></div>
-          <div class="guide-rule"><div class="guide-rule-num">🌿</div><div class="guide-rule-title">Day Casual</div><div class="guide-rule-text">Co-ords, linen sets, flowy dresses. Comfort-first but never sloppy. One "intentional" detail — a good bag or a statement earring — elevates it.</div></div>
-          <div class="guide-rule"><div class="guide-rule-num">🌙</div><div class="guide-rule-title">Black Tie (Rare)</div><div class="guide-rule-text">Floor-length gowns or a heavily embellished lehenga. Statement jewellery. This is the one occasion to go all the way — do not hold back.</div></div>
-        </div>
-        <div class="guide-tip-box">
-          <div class="guide-tip-label">The Golden Rule</div>
-          <div class="guide-tip-text">When in doubt, dress one level up from what you think is required. Being slightly overdressed is forgiven instantly. Being underdressed is remembered.</div>
-        </div>
-      </div>
-
+    <!-- AI RESULTS -->
+    <div class="ai-results" id="ai-results" style="display:none;">
+      <div class="ai-results-title">Recommended for You <span>AI Pick</span></div>
+      <div id="ai-rec-list"></div>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════ SAVED ══════════════════════ -->
-<div id="page-saved" class="page">
-  <div class="section-wrap">
-    <div class="section-header reveal">
-      <p class="sec-tag">Your Collection</p>
-      <h2 class="sec-title">Saved <em>Looks</em></h2>
-    </div>
-    <div id="saved-grid" class="outfit-grid"></div>
-    <div id="saved-empty" class="empty-saved" style="display:none">
-      <div class="icon">🤍</div>
-      <p>Your saved looks will appear here.</p>
-      <button class="btn-outline" onclick="go('occasion')" style="margin-top:1.5rem">Browse Outfits</button>
-    </div>
+<!-- ── CART SIDEBAR ── -->
+<div class="cart-overlay" id="cart-overlay" onclick="toggleCart()"></div>
+<div class="cart" id="cart">
+  <div class="cart-header">
+    <h2>Your Cart 🛍</h2>
+    <button class="close-cart" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cart-items"></div>
+  <div class="cart-footer">
+    <div class="cart-total-row"><span>Subtotal</span><span>₹<span id="subtotal">0</span></span></div>
+    <div class="cart-total-row"><span>Shipping</span><span style="color:#4ade80">FREE 🎉</span></div>
+    <div class="cart-grand-total"><span>Total</span><span>₹<span id="total">0</span></span></div>
+    <button class="checkout-btn" onclick="showCheckoutToast()">Proceed to Checkout →</button>
   </div>
 </div>
+
+<!-- ── TOAST ── -->
+<div class="toast" id="toast">✓ <span id="toast-msg">Added to cart!</span></div>
 
 <script>
-/* ══════════════════════════════════════════
-   DATA
-══════════════════════════════════════════ */
-const OUTFITS_WOMEN=[
-  {id:1,name:'Traditional Look',occ:'casual',emoji:'',
-   img:'media/women/traditional wear.png',
-   tags:['Minimal','Earth Tones','Comfortable'],
-   howToWear:'Opt for a matching set in terracotta or beige. Keep accessories minimal — a wicker bag and tan slides are perfect. Tuck the top slightly for shape.',
-   pairWith:['Wicker Tote','Tan Slides','Gold Hoops','Demi Sunglasses'],
-   aiTip:'Earth tones photograph beautifully in natural light. This co-ord works year-round in Bangalore\'s mild weather — light enough for afternoons, cosy enough for evenings.'},
-  {id:2,name:'Bold Blazer Look',occ:'office',emoji:'💼',
-   img:'media/women/bold blazer look.png',
-   tags:['Office','Structured','Confident'],
-   howToWear:'Pair an oversized blazer with high-waist trousers in a tonal colour. Add a fitted inner, pointed-toe heels, and a structured bag. Roll the sleeves one turn for intention.',
-   pairWith:['Pointed Heels','Structured Tote','Chain Necklace','Minimalist Watch'],
-   aiTip:'The blazer-trouser combo is the most versatile office investment. In neutral tones, it doubles as evening wear with the right accessories.'},
-  {id:3,name:'Ivory Salwar Set',occ:'ethnic',emoji:'👘',
-   img:'media/women/salwar look.png',
-   tags:['Ethnic','Elegant','Festive'],
-   howToWear:'Let the embroidery do the talking. Wear minimal jewellery — jhumkas or chandbalis. A potli bag in a contrast colour elevates without competing.',
-   pairWith:['Jhumka Earrings','Potli Bag','Kolhapuri Chappals','Delicate Bangles'],
-   aiTip:'Ivory salwars are timeless for daytime festive events. Add a pashmina dupatta for versatility across seasons.'},
-  {id:4,name:'Campus Cool Denim',occ:'college',emoji:'👖',
-   img:'media/women/cool denim look.png',
-   tags:['College','Casual','Trendy'],
-   howToWear:'High-waist barrel jeans with a cropped tee or tucked-in linen shirt. White sneakers are non-negotiable. Throw in a tote bag for books and personality.',
-   pairWith:['White Sneakers','Canvas Tote','Stud Earrings','Minimal Ring Stack'],
-   aiTip:'Barrel denim is the silhouette of the moment. It balances proportions beautifully for all body types — the wider leg creates a flattering hourglass effect.'},
-  {id:5,name:'Midnight Evening Gown',occ:'evening',emoji:'✨',
-   img:'media/women/eve gown look.png',
-   tags:['Evening','Dramatic','Luxury'],
-   howToWear:'Let the gown own the room. Keep hair sleek or in a chignon. One statement accessory — either earrings or a necklace, never both.',
-   pairWith:['Strappy Heels','Metallic Clutch','Statement Earrings','Subtle Perfume'],
-   aiTip:'A deep navy or midnight blue reads as luxurious as black but is far more distinctive. The colour flatters nearly every skin tone.'},
-  {id:6,name:'Linen Co-ord Set',occ:'casual',emoji:'🌿',
-   img:'media/women/linen coord set.png',
-   tags:['Casual','Breezy','Natural'],
-   howToWear:'A linen shirt-trouser set in sage, stone, or cream. Wear it loose for effortless ease. Espadrilles or strappy flats keep the vibe grounded.',
-   pairWith:['Espadrilles','Raffia Bag','Dainty Bracelet','Wire-Frame Sunnies'],
-   aiTip:'Linen breathes beautifully in Indian summer and monsoon months. A sage co-ord against golden skin tones is a quiet showstopper.'},
-  {id:7,name:'Pinstripe Formal',occ:'office',emoji:'📋',
-   img:'media/women/pinstripe formals.png',
-   tags:['Office','Classic','Polished'],
-   howToWear:'Pinstripe trousers with a crisp white shirt or a cashmere crew neck. Black heeled loafers finish it sharply. Carry a leather portfolio if you mean business.',
-   pairWith:['Black Loafers','Leather Portfolio','Pearl Stud Earrings','Slim Belt'],
-   aiTip:'Vertical pinstripes elongate every silhouette. This is the boardroom formula — high-impact with zero effort.'},
-  {id:8,name:'Sharara Suit',occ:'ethnic',emoji:'🪷',
-   img:'media/women/Sharara suit.png',
-   tags:['Ethnic','Royal','Traditional'],
-   howToWear:'A Kanjivaram or Banarasi in jewel tones. The blouse is key — a well-fitted blouse transforms the entire look. Pin your pallu for grace on the move.',
-   pairWith:['Gold Jewellery Set','Potli Bag','Embroidered Heels','Gajra (flowers)'],
-   aiTip:'Deep jewel tones — ruby, emerald, royal blue — photograph magnificently and command presence in any festive setting.'},
-  {id:9,name:'Oversized Street Set',occ:'college',emoji:'🧢',
-   img:'media/women/over sized street set.png',
-   tags:['College','Cozy','Relaxed'],
-   howToWear:'Oversized sweatshirt or hoodie with joggers or cargo trousers. Keep everything in a monochrome family for an effortlessly put-together look.',
-   pairWith:['Chunky Sneakers','Cap','Mini Crossbody','Layered Chains'],
-   aiTip:'Monochrome dressing in streetwear looks intentional and elevated. A single chunky sneaker or colour-blocked cap adds visual interest.'},
-  {id:10,name:'Sequin Evening Look',occ:'evening',emoji:'💫',
-   img:'media/women/sequin eve look.png',
-   tags:['Evening','Glamour','Statement'],
-   howToWear:'Let the sequins be the statement. Wear your hair up to show them off. Nude or metallic heels, a simple clutch — do not compete with the dress.',
-   pairWith:['Nude Heels','Minimalist Clutch','Diamond Studs','Soft Updo'],
-   aiTip:'Gold sequins work at every skin tone. The trick is restraint everywhere else — let the fabric earn the applause.'},
-  {id:11,name:'Floral Kurta Set',occ:'ethnic',emoji:'🌸',
-   img:'media/women/floral kurta set.png',
-   tags:['Ethnic','Delicate','Festive'],
-   howToWear:'A floral printed cotton or georgette kurta with palazzo or straight pants. The dupatta can be tied as a belt for a contemporary touch.',
-   pairWith:['Kolhapuri Sandals','Oxidised Earrings','Potli Bag','Floral Bindi'],
-   aiTip:'Florals in kurta sets are a southern India staple. The dupatta-as-belt trick modernises the silhouette brilliantly for younger occasions.'},
-  {id:12,name:'Structured Midi Dress',occ:'office',emoji:'👔',
-   img:'media/women/midi copilot.png',    
-   tags:['Office','Sophisticated','Chic'],
-   howToWear:'A midi dress in a solid or subtle print. Belted at the waist for definition. Block heels, a tote, and understated gold jewellery complete a polished day look.',
-   pairWith:['Block Heel Mules','Leather Tote','Gold Cuff','Tortoise Sunglasses'],
-   aiTip:'The midi dress is the most versatile office piece for women. It reads professional, comfortable, and effortlessly stylish across industries.'},
+// ─────────────────────────────────────────
+// PRODUCT DATABASE — 55 products
+// ─────────────────────────────────────────
+const allProducts = [
+  // ── MEN ──
+  {id:1,brand:"Manyavar",name:"Royal Sherwani with Dupatta — Maroon",category:"Men",type:"Sherwani",occasion:"Wedding",color:"Red",price:"₹8,499",op:"₹14,999",discount:"43%",rating:4.7,reviews:312,image:"https://images.unsplash.com/photo-1597983073493-88cd77c5d7cd?w=600&q=80"},
+  {id:2,brand:"FabIndia",name:"Classic Linen Kurta — Ivory White",category:"Men",type:"Kurta",occasion:"Casual",color:"White",price:"₹1,899",op:"₹2,999",discount:"37%",rating:4.5,reviews:218,image:"https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80"},
+  {id:3,brand:"H&M",name:"Slim-Fit Formal Blazer — Navy Blue",category:"Men",type:"Blazer",occasion:"Office",color:"Blue",price:"₹3,299",op:"₹5,499",discount:"40%",rating:4.3,reviews:175,image:"https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=600&q=80"},
+  {id:4,brand:"Zara",name:"Structured Wool Blend Blazer — Charcoal",category:"Men",type:"Blazer",occasion:"Office",color:"Black",price:"₹5,999",op:"₹9,999",discount:"40%",rating:4.6,reviews:289,image:"https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?w=600&q=80"},
+  {id:5,brand:"Peter England",name:"Oxford Weave Formal Shirt — White",category:"Men",type:"Shirt",occasion:"Office",color:"White",price:"₹999",op:"₹1,799",discount:"44%",rating:4.2,reviews:401,image:"https://images.unsplash.com/photo-1620012253295-c15cc3e65df4?w=600&q=80"},
+  {id:6,brand:"FabIndia",name:"Kurta Nehru Jacket Set — Olive Green",category:"Men",type:"Kurta",occasion:"Casual",color:"Green",price:"₹2,799",op:"₹4,499",discount:"38%",rating:4.8,reviews:156,image:"https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&q=80"},
+  {id:7,brand:"Levi's",name:"511 Slim Stretch Jeans — Dark Indigo",category:"Men",type:"Jeans",occasion:"Casual",color:"Blue",price:"₹2,499",op:"₹3,999",discount:"38%",rating:4.5,reviews:498,image:"https://images.unsplash.com/photo-1542272604-787c3835535d?w=600&q=80"},
+  {id:8,brand:"Allen Solly",name:"Casual Linen Chinos — Beige",category:"Men",type:"Trousers",occasion:"Casual",color:"Beige",price:"₹1,799",op:"₹2,799",discount:"36%",rating:4.3,reviews:224,image:"https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=600&q=80"},
+  {id:55,brand:"Van Heusen",name:"Slim Fit Checked Shirt — Blue White",category:"Men",type:"Shirt",occasion:"Office",color:"Blue",price:"₹1,299",op:"₹2,199",discount:"41%",rating:4.4,reviews:387,image:"https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=600&q=80"},
+  {id:56,brand:"Raymond",name:"Tailored Fit Formal Suit — Midnight",category:"Men",type:"Suit",occasion:"Office",color:"Black",price:"₹12,999",op:"₹22,999",discount:"43%",rating:4.8,reviews:134,image:"https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600&q=80"},
+  // ── WOMEN ──
+  {id:9,brand:"Zara",name:"Floral Wrap Midi Dress — Multicolor",category:"Women",type:"Dress",occasion:"Party",color:"Pink",price:"₹3,499",op:"₹5,999",discount:"42%",rating:4.7,reviews:345,image:"https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=600&q=80"},
+  {id:10,brand:"H&M",name:"Off-Shoulder Satin Evening Dress — Emerald",category:"Women",type:"Dress",occasion:"Party",color:"Green",price:"₹2,999",op:"₹4,999",discount:"40%",rating:4.6,reviews:267,image:"https://images.unsplash.com/photo-1612336307429-8a898d10e223?w=600&q=80"},
+  {id:11,brand:"Vero Moda",name:"Puff-Sleeve Crop Top — Blush Pink",category:"Women",type:"Top",occasion:"Casual",color:"Pink",price:"₹899",op:"₹1,499",discount:"40%",rating:4.4,reviews:312,image:"https://images.unsplash.com/photo-1485968579580-b6d095142e6e?w=600&q=80"},
+  {id:12,brand:"Levi's",name:"High-Rise Flare Denim Jeans — Blue",category:"Women",type:"Jeans",occasion:"Casual",color:"Blue",price:"₹2,799",op:"₹4,499",discount:"38%",rating:4.5,reviews:187,image:"https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=600&q=80"},
+  {id:13,brand:"AND",name:"Pleated Wide-Leg Palazzo Set — Ivory",category:"Women",type:"Palazzo",occasion:"Casual",color:"White",price:"₹1,999",op:"₹3,499",discount:"43%",rating:4.4,reviews:203,image:"https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600&q=80"},
+  {id:14,brand:"W",name:"Cotton Straight Kurta — Teal",category:"Women",type:"Kurta",occasion:"Casual",color:"Green",price:"₹1,299",op:"₹2,199",discount:"41%",rating:4.6,reviews:429,image:"https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=600&q=80"},
+  {id:15,brand:"Biba",name:"Printed Rayon A-Line Kurta — Peach",category:"Women",type:"Kurta",occasion:"Casual",color:"Pink",price:"₹999",op:"₹1,799",discount:"44%",rating:4.3,reviews:511,image:"https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600&q=80"},
+  {id:57,brand:"Mango",name:"Linen Blazer Co-ord Set — Camel",category:"Women",type:"Blazer",occasion:"Office",color:"Beige",price:"₹5,499",op:"₹8,999",discount:"39%",rating:4.7,reviews:198,image:"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=80"},
+  {id:58,brand:"Only",name:"Ribbed Bodycon Mini Dress — Black",category:"Women",type:"Dress",occasion:"Party",color:"Black",price:"₹1,799",op:"₹2,999",discount:"40%",rating:4.5,reviews:321,image:"https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&q=80"},
+  // ── ETHNIC WEAR ──
+  {id:16,brand:"Manyavar",name:"Anarkali Suit — Magenta Embroidered",category:"Ethnic Wear",type:"Anarkali",occasion:"Wedding",color:"Pink",price:"₹5,999",op:"₹9,999",discount:"40%",rating:4.8,reviews:189,image:"https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600&q=80"},
+  {id:17,brand:"FabIndia",name:"Banarasi Silk Saree — Deep Red",category:"Ethnic Wear",type:"Saree",occasion:"Wedding",color:"Red",price:"₹7,999",op:"₹13,999",discount:"43%",rating:4.9,reviews:134,image:"https://images.unsplash.com/photo-1617704548623-340376564e68?w=600&q=80"},
+  {id:18,brand:"Biba",name:"Lehenga Choli — Peacock Blue",category:"Ethnic Wear",type:"Lehenga",occasion:"Wedding",color:"Blue",price:"₹6,499",op:"₹10,999",discount:"41%",rating:4.7,reviews:221,image:"https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=600&q=80"},
+  {id:19,brand:"FabIndia",name:"Chanderi Silk Dupatta Set — Sage Green",category:"Ethnic Wear",type:"Dupatta Set",occasion:"Casual",color:"Green",price:"₹3,299",op:"₹5,499",discount:"40%",rating:4.5,reviews:98,image:"https://images.unsplash.com/photo-1504703395950-b89145a5425b?w=600&q=80"},
+  {id:20,brand:"Manyavar",name:"Sherwani Kurta Pajama — Ivory Gold",category:"Ethnic Wear",type:"Sherwani",occasion:"Wedding",color:"Gold",price:"₹9,499",op:"₹16,999",discount:"44%",rating:4.8,reviews:167,image:"https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&q=80"},
+  {id:21,brand:"Global Desi",name:"Printed Sharara Set — Mustard Yellow",category:"Ethnic Wear",type:"Sharara",occasion:"Party",color:"Beige",price:"₹2,499",op:"₹3,999",discount:"38%",rating:4.4,reviews:243,image:"https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=600&q=80"},
+  {id:22,brand:"Biba",name:"Embroidered Kurta with Jacket — Navy",category:"Ethnic Wear",type:"Kurta",occasion:"Party",color:"Blue",price:"₹3,799",op:"₹5,999",discount:"37%",rating:4.6,reviews:178,image:"https://images.unsplash.com/photo-1614252235316-8c857d38b5f4?w=600&q=80"},
+  {id:23,brand:"W",name:"Kantha Stitch Kurta Set — Terracotta",category:"Ethnic Wear",type:"Kurta",occasion:"Casual",color:"Red",price:"₹2,199",op:"₹3,499",discount:"37%",rating:4.5,reviews:312,image:"https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=600&q=80"},
+  {id:24,brand:"FabIndia",name:"Block Print Cotton Saree — Indigo Blue",category:"Ethnic Wear",type:"Saree",occasion:"Casual",color:"Blue",price:"₹3,999",op:"₹6,499",discount:"38%",rating:4.7,reviews:156,image:"https://images.unsplash.com/photo-1583391733956-6c78276477e2?w=600&q=80"},
+  // ── WESTERN WEAR ──
+  {id:25,brand:"Zara",name:"Tailored Linen Blazer — Camel Tan",category:"Western Wear",type:"Blazer",occasion:"Office",color:"Beige",price:"₹6,499",op:"₹10,999",discount:"41%",rating:4.7,reviews:203,image:"https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=80"},
+  {id:26,brand:"H&M",name:"Ribbed Turtleneck Sweater — Cream",category:"Western Wear",type:"Sweater",occasion:"Casual",color:"Beige",price:"₹1,499",op:"₹2,499",discount:"40%",rating:4.5,reviews:289,image:"https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=600&q=80"},
+  {id:27,brand:"Mango",name:"Plisse Wide-Leg Trousers — Ecru White",category:"Western Wear",type:"Trousers",occasion:"Office",color:"White",price:"₹2,799",op:"₹4,499",discount:"38%",rating:4.4,reviews:167,image:"https://images.unsplash.com/photo-1509631179647-0177331693ae?w=600&q=80"},
+  {id:28,brand:"Calvin Klein",name:"Classic Crewneck Tee — White",category:"Western Wear",type:"T-Shirt",occasion:"Casual",color:"White",price:"₹1,199",op:"₹1,999",discount:"40%",rating:4.3,reviews:456,image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600&q=80"},
+  {id:29,brand:"Tommy Hilfiger",name:"Striped Polo Shirt — Navy Blue",category:"Western Wear",type:"Polo",occasion:"Casual",color:"Blue",price:"₹2,499",op:"₹3,999",discount:"38%",rating:4.6,reviews:334,image:"https://images.unsplash.com/photo-1586790170083-2f9ceadc732d?w=600&q=80"},
+  {id:30,brand:"Vero Moda",name:"Satin Slip Dress — Champagne Gold",category:"Western Wear",type:"Dress",occasion:"Party",color:"Gold",price:"₹2,199",op:"₹3,699",discount:"41%",rating:4.5,reviews:198,image:"https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=600&q=80"},
+  {id:31,brand:"Only",name:"Asymmetric Hem Mini Dress — Black",category:"Western Wear",type:"Dress",occasion:"Party",color:"Black",price:"₹1,799",op:"₹2,999",discount:"40%",rating:4.4,reviews:223,image:"https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=600&q=80"},
+  {id:32,brand:"Zara",name:"Double-Breasted Overcoat — Slate Grey",category:"Western Wear",type:"Coat",occasion:"Casual",color:"Black",price:"₹7,999",op:"₹12,999",discount:"38%",rating:4.8,reviews:145,image:"https://images.unsplash.com/photo-1544441893-675973e31985?w=600&q=80"},
+  {id:59,brand:"H&M",name:"Straight Leg Cargo Pants — Khaki",category:"Western Wear",type:"Trousers",occasion:"Casual",color:"Beige",price:"₹1,699",op:"₹2,799",discount:"39%",rating:4.3,reviews:267,image:"https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=600&q=80"},
+  {id:60,brand:"Levi's",name:"Denim Jacket — Light Wash Blue",category:"Western Wear",type:"Jacket",occasion:"Casual",color:"Blue",price:"₹3,499",op:"₹5,999",discount:"42%",rating:4.6,reviews:389,image:"https://images.unsplash.com/photo-1544441893-675973e31985?w=600&q=80"},
+  // ── ACCESSORIES ──
+  {id:33,brand:"Fossil",name:"Chronograph Leather Watch — Brown Tan",category:"Accessories",type:"Watch",occasion:"Office",color:"Beige",price:"₹7,499",op:"₹11,999",discount:"38%",rating:4.8,reviews:378,image:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=600&q=80"},
+  {id:34,brand:"Michael Kors",name:"Signature Tote Bag — Tan Leather",category:"Accessories",type:"Bag",occasion:"Office",color:"Beige",price:"₹9,999",op:"₹16,999",discount:"41%",rating:4.7,reviews:212,image:"https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600&q=80"},
+  {id:35,brand:"Ray-Ban",name:"Classic Aviator Sunglasses — Gold Frame",category:"Accessories",type:"Sunglasses",occasion:"Casual",color:"Gold",price:"₹3,999",op:"₹6,999",discount:"43%",rating:4.9,reviews:567,image:"https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&q=80"},
+  {id:36,brand:"Adidas",name:"Leather Sneakers — Triple White",category:"Accessories",type:"Shoes",occasion:"Casual",color:"White",price:"₹4,499",op:"₹7,499",discount:"40%",rating:4.6,reviews:423,image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=600&q=80"},
+  {id:37,brand:"Steve Madden",name:"Block Heel Ankle Boots — Tan Leather",category:"Accessories",type:"Shoes",occasion:"Office",color:"Beige",price:"₹3,799",op:"₹5,999",discount:"37%",rating:4.5,reviews:189,image:"https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=600&q=80"},
+  {id:38,brand:"Fastrack",name:"Slim Mesh Strap Watch — Rose Gold",category:"Accessories",type:"Watch",occasion:"Party",color:"Gold",price:"₹2,499",op:"₹3,999",discount:"38%",rating:4.4,reviews:303,image:"https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=600&q=80"},
+  {id:39,brand:"Tommy Hilfiger",name:"Canvas Crossbody Bag — Navy Blue",category:"Accessories",type:"Bag",occasion:"Casual",color:"Blue",price:"₹3,299",op:"₹5,499",discount:"40%",rating:4.5,reviews:167,image:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80"},
+  {id:40,brand:"Charles & Keith",name:"Strappy Stiletto Heels — Nude Beige",category:"Accessories",type:"Shoes",occasion:"Party",color:"Beige",price:"₹2,799",op:"₹4,499",discount:"38%",rating:4.6,reviews:245,image:"https://images.unsplash.com/photo-1515347619252-60a4bf4fff4f?w=600&q=80"},
+  {id:41,brand:"Puma",name:"Suede Classic Sneakers — Black",category:"Accessories",type:"Shoes",occasion:"Casual",color:"Black",price:"₹3,499",op:"₹5,499",discount:"36%",rating:4.4,reviews:389,image:"https://images.unsplash.com/photo-1608231387042-66d1773070a5?w=600&q=80"},
+  {id:42,brand:"Baggit",name:"Vegan Leather Sling Bag — Cobalt Blue",category:"Accessories",type:"Bag",occasion:"College",color:"Blue",price:"₹1,799",op:"₹2,999",discount:"40%",rating:4.3,reviews:134,image:"https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=600&q=80"},
+  // ── JEWELRY ──
+  {id:43,brand:"Tanishq",name:"Kundan Choker Necklace — Gold Plated",category:"Jewelry",type:"Necklace",occasion:"Wedding",color:"Gold",price:"₹4,999",op:"₹7,999",discount:"38%",rating:4.9,reviews:234,image:"https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=600&q=80"},
+  {id:44,brand:"Voylla",name:"Pearl Drop Earrings — Silver",category:"Jewelry",type:"Earrings",occasion:"Party",color:"White",price:"₹799",op:"₹1,299",discount:"38%",rating:4.5,reviews:312,image:"https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&q=80"},
+  {id:45,brand:"Joyalukkas",name:"Gold Plated Bangles — Set of 6",category:"Jewelry",type:"Bangles",occasion:"Wedding",color:"Gold",price:"₹2,499",op:"₹3,999",discount:"38%",rating:4.7,reviews:189,image:"https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=600&q=80"},
+  {id:46,brand:"Tanishq",name:"Diamond-Studded Stud Earrings — Gold",category:"Jewelry",type:"Earrings",occasion:"Party",color:"Gold",price:"₹6,999",op:"₹11,999",discount:"42%",rating:4.9,reviews:156,image:"https://images.unsplash.com/photo-1608050072262-7c35a01eb8b4?w=600&q=80"},
+  {id:47,brand:"Voylla",name:"Oxidised Silver Jhumka Earrings",category:"Jewelry",type:"Earrings",occasion:"Casual",color:"Black",price:"₹699",op:"₹1,199",discount:"42%",rating:4.6,reviews:423,image:"https://images.unsplash.com/photo-1630019852942-f89202989a59?w=600&q=80"},
+  {id:48,brand:"CaratLane",name:"Rose Gold Layered Chain Necklace",category:"Jewelry",type:"Necklace",occasion:"Party",color:"Gold",price:"₹3,799",op:"₹5,999",discount:"37%",rating:4.8,reviews:198,image:"https://images.unsplash.com/photo-1596944924616-7b38e7cfac36?w=600&q=80"},
+  {id:49,brand:"Joyalukkas",name:"Antique Temple Necklace Set — Gold",category:"Jewelry",type:"Necklace",occasion:"Wedding",color:"Gold",price:"₹5,499",op:"₹8,999",discount:"39%",rating:4.8,reviews:167,image:"https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=600&q=80"},
+  {id:50,brand:"Tanishq",name:"Sterling Silver Charm Bracelet",category:"Jewelry",type:"Bracelet",occasion:"Casual",color:"White",price:"₹2,999",op:"₹4,999",discount:"40%",rating:4.7,reviews:289,image:"https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=600&q=80"},
 ];
 
-const OUTFITS_MEN=[
-  {id:101,name:'Relaxed Linen Shirt',occ:'casual',emoji:'🌊',
-   img:'media/men/linen shirt.png',
-   tags:['Casual','Breezy','Summer'],
-   howToWear:'Linen shirt in ivory, sky blue, or sage — half-tucked or fully open over a white tee. Linen trousers or chinos. Loafers or leather sandals.',
-   pairWith:['Linen Trousers','Leather Sandals','Minimal Watch','Canvas Tote'],
-   aiTip:'Linen is India\'s finest casual fabric. A half-tucked ivory linen shirt with chinos is the definitive Bangalore brunch look.'},
-  {id:102,name:'Sharp Suit Look',occ:'office',emoji:'🏛️',
-   img:'media/men/sharp suit look.png',
-   tags:['Office','Formal','Powerful'],
-   howToWear:'A well-tailored suit in charcoal, navy, or medium grey. Fit is everything — shoulder seam must hit exactly. Pocket square in a complementary tone.',
-   pairWith:['Oxford Shoes','Silk Tie','Pocket Square','Dress Watch'],
-   aiTip:'A charcoal suit is the single most versatile item in a man\'s wardrobe. It transitions from board meetings to after-work dinners with one shirt change.'},
-  {id:103,name:'Sherwani Set',occ:'ethnic',emoji:'👑',
-   img:'media/men/shervani set.png',
-   tags:['Ethnic','Royal','Wedding'],
-   howToWear:'A fitted sherwani in ivory, gold, or deep maroon. Churidar must be well-fitted. Add a brooch or kalgi for weddings. Mojris are the ideal footwear.',
-   pairWith:['Mojris','Brooch / Kalgi','Pocket Square','Jewelled Ring'],
-   aiTip:'Ivory sherwanis work universally for weddings — groom or guest. The fabric quality speaks volumes; invest in silk or raw silk blends.'},
-  {id:104,name:'College Streetwear',occ:'college',emoji:'🎧',
-   img:'media/men/street wear.png',
-   tags:['College','Street','Trendy'],
-   howToWear:'Graphic tee or vintage-wash shirt with baggy jeans or cargos. Layer a flannel or bomber. Chunky sneakers are the anchor of the look.',
-   pairWith:['Chunky Sneakers','Cargo Pants','Crossbody Bag','Baseball Cap'],
-   aiTip:'The flannel-over-tee layer is the easiest way to add dimension to a basic outfit. Keep the rest neutral so the sneaker does the work.'},
-  {id:105,name:'Black Tie Evening',occ:'evening',emoji:'🎩',
-   img:'media/men/black tie evening.png',
-   tags:['Evening','Dapper','Luxury'],
-   howToWear:'A classic tuxedo jacket with matching trousers, crisp white shirt, and black bow tie. Fit must be impeccable. Patent or polished leather shoes.',
-   pairWith:['Patent Shoes','Cufflinks','Bow Tie','Dress Watch'],
-   aiTip:'When wearing black tie, the fit of the jacket is the only variable. Everything else is standardised — invest in tailoring, not accessories.'},
-  {id:106,name:'Chino & Tee Combo',occ:'casual',emoji:'☀️',
-   img:'media/men/chino.png',
-   tags:['Casual','Clean','Everyday'],
-   howToWear:'Slim or straight chinos in stone, olive, or navy. A clean crew-neck tee — no logos. White sneakers or loafers. The formula works every single time.',
-   pairWith:['White Sneakers','Leather Belt','Minimal Watch','Aviator Sunglasses'],
-   aiTip:'The chino-tee combination is the most reliable casual formula in menswear. The colour of the chino determines the mood — olive is effortless, navy is sharp.'},
-  {id:107,name:'Business Casual Blazer',occ:'office',emoji:'💡',
-   img:'media/men/casual blazer.png',
-   tags:['Office','Smart','Refined'],
-   howToWear:'A blazer over a smart casual shirt — no tie. Chinos or tailored trousers. Suede loafers or clean leather shoes. This is the modern office uniform.',
-   pairWith:['Suede Loafers','Dress Trousers','Smart Watch','Leather Card Holder'],
-   aiTip:'The blazer without tie reads as "confident and approachable." In a startup or creative office, it positions you as the most put-together person in the room.'},
-  {id:108,name:'Kurta Pyjama',occ:'ethnic',emoji:'🪔',
-   img:'',
-   tags:['Ethnic','Festive','Classic'],
-   howToWear:'A well-fitted kurta in cotton or silk. The pyjama must be tailored — never too baggy. Pair with mojris or clean leather sandals. Add a simple chain or watch.',
-   pairWith:['Mojris / Sandals','Minimal Watch','Metal Brooch','Stole (optional)'],
-   aiTip:'A kurta-pyjama in Nehru blue or ivory is the most Indian festive look that ages without expiry. The fabric quality defines the entire impression.'},
-  {id:109,name:'Campus Hoodie Look',occ:'college',emoji:'📚',
-   img:'',
-   tags:['College','Cozy','Casual'],
-   howToWear:'An oversized hoodie with straight or cargo trousers. Keep the colour story in two or fewer tones. Sneakers or chunky boots. Simple and effective.',
-   pairWith:['Cargo Trousers','High Sneakers','Minimal Cap','Backpack'],
-   aiTip:'An oversized hoodie works harder when the trouser is straight or slightly baggy — avoid super slim bottoms which disrupt proportion.'},
-  {id:110,name:'Bandhgala Jacket',occ:'evening',emoji:'🌙',
-   img:'',
-   tags:['Evening','Indo-Western','Classy'],
-   howToWear:'A fitted bandhgala jacket over trousers of the same colour or a complementary tonal shade. Keep it monochromatic for maximum impact. Mojris or clean leather shoes.',
-   pairWith:['Leather / Mojri Shoes','Pocket Square','Minimal Cufflinks','Dress Watch'],
-   aiTip:'The bandhgala is India\'s answer to the tuxedo jacket — equally sophisticated, more culturally rich. In black or midnight blue, it\'s unstoppable.'},
-  {id:111,name:'Nehru Jacket Set',occ:'ethnic',emoji:'🎋',
-   img:'',
-   tags:['Ethnic','Heritage','Festive'],
-   howToWear:'A Nehru jacket over a kurta — slim collar, subtle structure. Works best in textured fabrics like brocade or jacquard. Churidar or well-fitted pyjama.',
-   pairWith:['Churidar','Mojris','Brooch','Geometric Cufflinks'],
-   aiTip:'The Nehru jacket layered over a kurta is the most versatile piece for multi-event festive seasons. One jacket, three different kurtas = three complete looks.'},
-  {id:112,name:'Oxford Shirt & Trousers',occ:'office',emoji:'📎',
-   img:'',
-   tags:['Office','Minimal','Sharp'],
-   howToWear:'A crisp Oxford-weave shirt in white or light blue with slim tailored trousers. Tuck it in fully. A brown or black leather belt and matching shoes. Keep it architectural.',
-   pairWith:['Leather Oxford Shoes','Slim Belt','Dress Watch','Simple Cufflinks'],
-   aiTip:'The Oxford shirt is the most reliable workwear foundation. In white with charcoal trousers, you\'ll never be underdressed or overdressed anywhere.'},
+// ── OUTFIT COMBOS ──
+const outfitCombos = [
+  {occasion:"College",title:"Denim & Casual Chic",images:["https://images.unsplash.com/photo-1541099649105-f69ad21f3246?w=400&q=80","https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400&q=80","https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80"],price:"₹5,197",ids:[12,28,36]},
+  {occasion:"College",title:"Smart Casual Kurta Look",images:["https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80","https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=400&q=80","https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=400&q=80"],price:"₹6,497",ids:[2,8,42]},
+  {occasion:"Office",title:"Power Blazer Ensemble",images:["https://images.unsplash.com/photo-1617127365659-c47fa864d8bc?w=400&q=80","https://images.unsplash.com/photo-1620012253295-c15cc3e65df4?w=400&q=80","https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80"],price:"₹12,797",ids:[3,5,33]},
+  {occasion:"Office",title:"Elegant Work Wear",images:["https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&q=80","https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400&q=80","https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=400&q=80"],price:"₹13,297",ids:[25,27,37]},
+  {occasion:"Party",title:"Glam Night Out",images:["https://images.unsplash.com/photo-1572804013309-59a88b7e92f1?w=400&q=80","https://images.unsplash.com/photo-1515347619252-60a4bf4fff4f?w=400&q=80","https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=400&q=80"],price:"₹7,097",ids:[9,40,44]},
+  {occasion:"Party",title:"Cocktail Evening Look",images:["https://images.unsplash.com/photo-1469334031218-e382a71b716b?w=400&q=80","https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=400&q=80","https://images.unsplash.com/photo-1596944924616-7b38e7cfac36?w=400&q=80"],price:"₹8,497",ids:[30,38,48]},
+  {occasion:"Wedding",title:"Bridal Ethnic Elegance",images:["https://images.unsplash.com/photo-1617704548623-340376564e68?w=400&q=80","https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=400&q=80","https://images.unsplash.com/photo-1611652022419-a9419f74343d?w=400&q=80"],price:"₹15,497",ids:[17,43,45]},
+  {occasion:"Wedding",title:"Groom's Royal Sherwani",images:["https://images.unsplash.com/photo-1597983073493-88cd77c5d7cd?w=400&q=80","https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400&q=80","https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80"],price:"₹20,997",ids:[1,49,33]},
 ];
 
-const ACCESSORIES=[
-  {id:1,name:'Structured Tote',cat:'bags',icon:'👜',img:'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400&q=80&fit=crop',match:'Perfect for office and college looks',chips:['Minimal','Everyday'],badge:'Essential'},
-  {id:2,name:'Gold Hoop Earrings',cat:'jewellery',icon:'📿',img:'https://images.unsplash.com/photo-1630019852942-f89202989a59?w=400&q=80&fit=crop',match:'Elevates ethnic and evening outfits',chips:['Gold','Classic'],badge:null},
-  {id:3,name:'Block Heel Mules',cat:'shoes',icon:'👠',img:'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=400&q=80&fit=crop',match:'Polishes any office or ethnic look',chips:['Heels','Formal'],badge:'Trending'},
-  {id:4,name:'Silk Scarf',cat:'scarves',icon:'🧣',img:'https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400&q=80&fit=crop',match:'Adds elegance to casual and office styles',chips:['Silk','Versatile'],badge:null},
-  {id:5,name:'Chain-Link Belt',cat:'scarves',icon:'⛓️',img:'https://images.unsplash.com/photo-1624138784614-87fd1b6528f8?w=400&q=80&fit=crop',match:'Defines waist on oversized silhouettes',chips:['Statement','Structural'],badge:null},
-  {id:6,name:'Woven Basket Bag',cat:'bags',icon:'🧺',img:'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400&q=80&fit=crop',match:'Casual warm-weather essential',chips:['Casual','Summer'],badge:null},
-  {id:7,name:'Pearl Strand Necklace',cat:'jewellery',icon:'🪩',img:'https://images.unsplash.com/photo-1599643477877-530eb83abc8e?w=400&q=80&fit=crop',match:'Classic with ethnic and evening looks',chips:['Pearls','Timeless'],badge:'Classic'},
-  {id:8,name:'White Sneakers',cat:'shoes',icon:'👟',img:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&q=80&fit=crop',match:'The effortless college & casual finish',chips:['Casual','Clean'],badge:'Essential'},
-  {id:9,name:'Sleek Analog Watch',cat:'watches',icon:'⌚',img:'https://images.unsplash.com/photo-1587836374828-4dbafa94cf0e?w=400&q=80&fit=crop',match:'Sharpens any professional outfit',chips:['Minimal','Professional'],badge:null},
-  {id:10,name:'Kolhapuri Chappals',cat:'shoes',icon:'🥿',img:'https://images.unsplash.com/photo-1560769629-975ec94e6a86?w=400&q=80&fit=crop',match:'Authentic ethnic styling',chips:['Ethnic','Artisan'],badge:null},
-  {id:11,name:'Metallic Clutch',cat:'bags',icon:'💼',img:'https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=400&q=80&fit=crop',match:'Evening and festive occasions',chips:['Evening','Formal'],badge:'Evening'},
-  {id:12,name:'Statement Cuff',cat:'jewellery',icon:'💛',img:'https://images.unsplash.com/photo-1611085583191-a3b181a88401?w=400&q=80&fit=crop',match:'Instantly elevates minimal looks',chips:['Bold','Gold'],badge:'Statement'},
-  {id:13,name:'Leather Oxford Shoes',cat:'shoes',icon:'🥾',img:'https://images.unsplash.com/photo-1533867617858-e7b97e060509?w=400&q=80&fit=crop',match:'The menswear finishing touch',chips:['Classic','Formal'],badge:null},
-  {id:14,name:'Brooch / Lapel Pin',cat:'jewellery',icon:'📌',img:'https://images.unsplash.com/photo-1602173574767-37ac01994b2a?w=400&q=80&fit=crop',match:'Personalises suits and kurtas',chips:['Heritage','Detail'],badge:null},
-  {id:15,name:'Mojris',cat:'shoes',icon:'🎆',img:'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=400&q=80&fit=crop',match:'Essential for Indian ethnic wear',chips:['Ethnic','Artisan'],badge:'Cultural'},
-];
+// ── STATE ──
+let cart=[];
+let activeCategory='All';
+let searchQuery='';
+let sortMode='default';
+let activeOccasion='';
+let activeColor='';
+let activePriceRange='';
+let aiProfile={body:'',face:'',skin:'',hair:'',style:''};
+let activeComboOccasion='All';
 
-const COLOURS=[
-  {name:'Ivory',hex:'#f5f0e8'},{name:'Black',hex:'#0d0d0d'},{name:'Navy',hex:'#1a2a4a'},
-  {name:'Burgundy',hex:'#6b1a2a'},{name:'Olive',hex:'#4a5240'},{name:'Camel',hex:'#c4956a'},
-  {name:'Blush',hex:'#e8a0a0'},{name:'Cream',hex:'#f0e8d0'},{name:'Charcoal',hex:'#3a3a3a'},
-  {name:'Forest',hex:'#2d4a2d'},{name:'Rust',hex:'#a84c2a'},{name:'Stone',hex:'#8c7b6b'},
-  {name:'Sage',hex:'#7d9b76'},{name:'Mustard',hex:'#c89b2a'},{name:'Slate',hex:'#5a6a7a'},
-  {name:'Terracotta',hex:'#b05a3a'},
-];
+// ── PRICE PARSER ──
+function parsePrice(s){return parseInt(s.replace(/[₹,]/g,''));}
 
-const COMBOS={
-  'Ivory+Navy':'A perennial pairing — cool confidence with warm softness. The navy grounds the ivory beautifully.',
-  'Ivory+Black':'The ultimate minimal contrast. Never wrong, always intentional.',
-  'Black+Burgundy':'Moody, rich, authoritative. Made for evenings and power moves alike.',
-  'Camel+Black':'Warm luxury meets sharp edge. A pairing that photographs magnificently.',
-  'Blush+Charcoal':'Feminine softness balanced by grounded strength. Unexpectedly sophisticated.',
-  'Ivory+Camel':'A tone-on-tone look that whispers luxury. The subtlety is the statement.',
-  'Navy+Cream':'Classic nautical elegance, dressed up for modern occasions.',
-  'Olive+Camel':'Earthy, grounded, seasonless. An homage to landscape and linen.',
-  'Rust+Stone':'Warm and textural — perfect for autumn styling and festive dressing.',
-  'Sage+Cream':'Fresh and serene. A pairing that evokes morning light and botanical gardens.',
-  'Mustard+Charcoal':'Bold warmth against urban cool. Surprising and deeply contemporary.',
-  'Terracotta+Ivory':'The quintessential Indian summer palette. Rich, warm, and timeless.',
-  'Slate+Cream':'A cooler minimal combination — elegant without effort.',
-  default:'A considered combination with interesting tension. Let proportion guide you: 60% dominant, 30% secondary, 10% accent.',
-};
-
-const TRENDS=[
-  {season:'SS 2025',name:'Quiet Luxury',img:'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=600&q=80&fit=crop&crop=top',desc:'Understated, logo-free dressing in neutral palettes. Cashmere, silk, and fine wool in ivory, camel, and stone. The look is wealth without announcement.',items:['Cashmere Tops','Wide-Leg Trousers','Minimal Leather Bags','No-Logo Basics'],heat:92},
-  {season:'SS 2025',name:'Neo-Ethnic',img:'https://images.unsplash.com/photo-1617019114583-affb34d1b3cd?w=600&q=80&fit=crop&crop=top',desc:'Indian craft traditions reimagined through contemporary silhouettes. Block prints on tailored cuts, handloom fabrics styled with modern accessories.',items:['Block Print Blazers','Handloom Co-ords','Contemporary Sarees','Artisan Jewellery'],heat:88},
-  {season:'SS 2025',name:'Coastal Grandmother',img:'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=600&q=80&fit=crop&crop=top',desc:'Linen, flowing fabrics, and a relaxed confidence. Straw bags, wide-brim hats, and a palette of sea glass, ivory, and sandy taupe.',items:['Linen Dresses','Wide-Brim Hats','Straw Totes','Woven Sandals'],heat:74},
-  {season:'SS 2025',name:'Dopamine Dressing',img:'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=600&q=80&fit=crop&crop=top',desc:'Colour as therapy. Saturated hues, unexpected pairings, and the unapologetic joy of wearing what makes you feel alive.',items:['Color-Block Sets','Bright Accessories','Printed Co-ords','Colour Footwear'],heat:80},
-  {season:'SS 2025',name:'Gorpcore',img:'https://images.unsplash.com/photo-1551698618-1dfe5d97d256?w=600&q=80&fit=crop&crop=top',desc:'Outdoor utility aesthetics brought into everyday fashion. Technical fabrics, cargo pockets, trail-ready footwear, and functional layering.',items:['Cargo Trousers','Technical Vests','Trail Sneakers','Utility Jackets'],heat:65},
-  {season:'SS 2025',name:'Soft Tailoring',img:'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80&fit=crop&crop=top',desc:'The rigid suit gets a softened update. Unstructured blazers, pleated trousers, and an ease of silhouette that reads refined without stiffness.',items:['Unstructured Blazers','Pleated Trousers','Softened Suiting','Wide Lapels'],heat:85},
-];
-
-/* ══════════ STATE ══════════ */
-let OUTFITS=OUTFITS_WOMEN;
-let activeGender='women';
-let activeOcc='all';
-let saved=JSON.parse(localStorage.getItem('sg_saved')||'[]');
-let quizData={shape:null,style:null,occ:null,gender:null};
-let selBase=null,selBottom=null,selAccent=null;
-
-/* ══════════ TOAST ══════════ */
-function toast(msg){
-  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),2400);
-}
-
-/* ══════════ NAVIGATION ══════════ */
-function go(page){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-links button').forEach(b=>b.classList.remove('active'));
-  document.getElementById('page-'+page).classList.add('active');
-  const nb=document.getElementById('nav-'+page);if(nb)nb.classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
-  if(page==='occasion'){
-    document.getElementById('gbtn-women').classList.toggle('active',activeGender==='women');
-    document.getElementById('gbtn-men').classList.toggle('active',activeGender==='men');
-    renderOutfits(activeOcc);
-  }
-  if(page==='accessories') renderAccessories('all');
-  if(page==='saved') renderSaved();
-  if(page==='colours') renderSwatches();
-  if(page==='trends') renderTrends();
-  setTimeout(()=>document.querySelectorAll('.reveal').forEach(el=>{if(!el.classList.contains('on'))el.classList.add('on')}),100);
-}
-
-/* ══════════ SAVE / WISHLIST ══════════ */
-function saveSC(id){
-  saved=JSON.parse(localStorage.getItem('sg_saved')||'[]');
-  if(saved.includes(id)){saved=saved.filter(s=>s!==id);toast('Removed from saved')}
-  else{saved.push(id);toast('Saved to your collection ✦')}
-  localStorage.setItem('sg_saved',JSON.stringify(saved));
-  updateSavedCount();
-  document.querySelectorAll(`[data-save="${id}"]`).forEach(el=>{
-    el.classList.toggle('saved',saved.includes(id));
-    el.textContent=saved.includes(id)?'♥':'♡';
+// ── FILTER ──
+function getFiltered(){
+  let list=allProducts.filter(p=>{
+    const catOk=activeCategory==='All'||p.category===activeCategory;
+    const q=searchQuery.toLowerCase();
+    const srchOk=!q||p.name.toLowerCase().includes(q)||p.brand.toLowerCase().includes(q)||p.category.toLowerCase().includes(q)||(p.type||'').toLowerCase().includes(q);
+    const occOk=!activeOccasion||(p.occasion||'').toLowerCase().includes(activeOccasion.toLowerCase());
+    const colOk=!activeColor||(p.color||'').toLowerCase().includes(activeColor.toLowerCase());
+    let priceOk=true;
+    if(activePriceRange){
+      const [mn,mx]=activePriceRange.split('-').map(Number);
+      priceOk=parsePrice(p.price)>=mn&&parsePrice(p.price)<=mx;
+    }
+    return catOk&&srchOk&&occOk&&colOk&&priceOk;
   });
-}
-function updateSavedCount(){
-  saved=JSON.parse(localStorage.getItem('sg_saved')||'[]');
-  const el=document.getElementById('saved-count');
-  if(el)el.textContent=saved.length?`(${saved.length})`:'';
-}
-updateSavedCount();
-
-/* ══════════ OUTFIT CARD ══════════ */
-function outfitCard(o){
-  const isSaved=saved.includes(o.id);
-  return `<div class="outfit-card" onclick="openModal(${o.id})">
-    <div class="outfit-thumb">
-      ${o.img?`<img class="card-img" src="${o.img}" alt="${o.name}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>`:``}
-      <div class="card-img-placeholder" ${o.img?'style="display:none"':''}>${o.emoji||'👗'}</div>
-      <div class="card-overlay"></div>
-      <div class="card-view-btn">View Details</div>
-    </div>
-    <button class="card-save ${isSaved?'saved':''}" data-save="${o.id}" onclick="event.stopPropagation();saveSC(${o.id})">${isSaved?'♥':'♡'}</button>
-    <div class="card-info">
-      <div class="card-name">${o.name}</div>
-      <div class="card-tags">${o.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
-    </div>
-  </div>`;
+  if(sortMode==='price-low')list.sort((a,b)=>parsePrice(a.price)-parsePrice(b.price));
+  else if(sortMode==='price-high')list.sort((a,b)=>parsePrice(b.price)-parsePrice(a.price));
+  else if(sortMode==='rating')list.sort((a,b)=>b.rating-a.rating);
+  else if(sortMode==='discount')list.sort((a,b)=>parseInt(b.discount)-parseInt(a.discount));
+  return list;
 }
 
-/* ══════════ RENDER OUTFITS ══════════ */
-function renderOutfits(occ,btn){
-  activeOcc=occ;
-  if(btn){
-    document.querySelectorAll('.occ-tab').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
+// ── STARS ──
+function stars(r){
+  const f=Math.floor(r),h=r%1>=0.5?1:0;
+  return '★'.repeat(f)+(h?'½':'')+'☆'.repeat(5-f-h);
+}
+
+// ── RENDER PRODUCTS ──
+function renderProducts(){
+  const list=getFiltered();
+  const el=document.getElementById('products');
+  document.getElementById('count-label').textContent=`Showing ${list.length} product${list.length!==1?'s':''}`;
+  if(!list.length){el.innerHTML='<div class="no-results">😕 No products found. Try different filters.</div>';return;}
+  el.innerHTML=list.map(p=>`
+    <div class="card">
+      <div class="card-img-wrap">
+        <img src="${p.image}" alt="${p.name}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80'">
+        <div class="badge">${p.discount} OFF</div>
+        <div class="wishlist-btn" id="wish-${p.id}" onclick="toggleWish(${p.id},this)">♡</div>
+      </div>
+      <div class="card-body">
+        <div class="card-brand">${p.brand}</div>
+        <div class="card-name">${p.name}</div>
+        <div class="card-category">${p.category} · ${p.type}</div>
+        <div class="rating-row">
+          <span class="stars">${stars(p.rating)}</span>
+          <span class="rating-num">${p.rating}</span>
+          <span class="review-count">(${p.reviews.toLocaleString()})</span>
+        </div>
+        <div class="price-row">
+          <span class="price">${p.price}</span>
+          <span class="original-price">${p.op}</span>
+          <span class="discount-tag">${p.discount} off</span>
+        </div>
+        <button class="add-btn" onclick="addToCart(${p.id})">Add to Cart</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── RENDER OUTFIT COMBOS ──
+function renderCombos(){
+  const list=activeComboOccasion==='All'?outfitCombos:outfitCombos.filter(c=>c.occasion===activeComboOccasion);
+  const el=document.getElementById('outfit-combos');
+  el.innerHTML=list.map(c=>`
+    <div class="outfit-combo">
+      <div class="outfit-combo-header">
+        <h3>${c.title}</h3>
+        <span class="occ-badge">${c.occasion}</span>
+      </div>
+      <div class="outfit-images">
+        ${c.images.map(img=>`<img src="${img}" alt="outfit" onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80'">`).join('')}
+      </div>
+      <div class="outfit-combo-footer">
+        <span>Full Look: <strong>${c.price}</strong></span>
+        <button class="combo-add-btn" onclick="addComboToCart([${c.ids}])">Add All to Cart</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ── CART ──
+function addToCart(id){
+  const p=allProducts.find(x=>x.id===id);
+  cart.push({...p,cartId:Date.now()+Math.random()});
+  updateCartUI();
+  showToast(`"${p.name.substring(0,26)}${p.name.length>26?'…':''}" added!`);
+}
+function addComboToCart(ids){
+  ids.forEach(id=>addToCart(id));
+  showToast(`${ids.length} items added to cart!`);
+}
+function removeFromCart(cid){cart=cart.filter(x=>x.cartId!==cid);updateCartUI();}
+function updateCartUI(){
+  document.getElementById('cart-count').textContent=cart.length;
+  if(!cart.length){
+    document.getElementById('cart-items').innerHTML=`<div class="empty-cart"><div class="icon">🛍</div><p>Your cart is empty</p></div>`;
+    document.getElementById('subtotal').textContent='0';
+    document.getElementById('total').textContent='0';
+    return;
   }
-  const data=occ==='all'?OUTFITS:OUTFITS.filter(o=>o.occ===occ);
-  const grid=document.getElementById('outfit-grid');
-  grid.innerHTML=data.map(o=>outfitCard(o)).join('');
-}
-
-/* ══════════ GENDER SWITCH ══════════ */
-function switchGender(g,btn){
-  activeGender=g;
-  OUTFITS=g==='women'?OUTFITS_WOMEN:OUTFITS_MEN;
-  document.querySelectorAll('.g-btn').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  renderOutfits(activeOcc);
-}
-
-/* ══════════ OUTFIT MODAL ══════════ */
-function openModal(id){
-  const all=[...OUTFITS_WOMEN,...OUTFITS_MEN];
-  const o=all.find(x=>x.id===id);
-  if(!o)return;
-  const isSaved=saved.includes(o.id);
-  document.getElementById('modal-inner').innerHTML=`
-    <div class="modal-layout">
-      <div>
-        ${o.img?`<img class="modal-img" src="${o.img}" alt="${o.name}" onerror="this.style.display='none'"/>`:``}
-        <div class="modal-img-placeholder" ${o.img?'style="display:none"':''}>${o.emoji||'👗'}</div>
+  let total=0;
+  document.getElementById('cart-items').innerHTML=cart.map(item=>{
+    const p=parsePrice(item.price);total+=p;
+    return `<div class="cart-item">
+      <img src="${item.image}" alt="${item.name}" onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&q=60'">
+      <div class="cart-item-info">
+        <div class="cart-item-brand">${item.brand}</div>
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-price">${item.price}</div>
       </div>
-      <div class="modal-details">
-        <div class="modal-occ">${o.occ.charAt(0).toUpperCase()+o.occ.slice(1)}</div>
-        <h2 class="modal-name">${o.name}</h2>
-        <div class="modal-tags">${o.tags.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
-        <div class="modal-section-title">How to Wear It</div>
-        <p class="modal-how-to-wear">${o.howToWear}</p>
-        <div class="modal-section-title">Pair With</div>
-        <div class="modal-pair-items">${o.pairWith.map(p=>`<span class="pair-chip">${p}</span>`).join('')}</div>
-        <div class="modal-ai-tip">
-          <div class="modal-ai-tip-label"><span class="ai-dot"></span>Stylist's Note</div>
-          <p class="modal-ai-tip-text">${o.aiTip}</p>
-        </div>
-        <div class="modal-actions">
-          <button class="btn-save-modal ${isSaved?'saved':''}" data-save="${o.id}" onclick="saveSC(${o.id});this.classList.toggle('saved');this.textContent=saved.includes(${o.id})?'♥ Saved':'♡ Save Look'">
-            ${isSaved?'♥ Saved':'♡ Save Look'}
-          </button>
-          <button class="btn-outline" onclick="viewStyleGuide('${o.name}','${o.occ}')">Style Guide ✦</button>
-        </div>
-      </div>
+      <button class="cart-remove" onclick="removeFromCart(${item.cartId})">✕</button>
     </div>`;
-  document.getElementById('outfit-modal').classList.add('open');
-  document.body.style.overflow='hidden';
+  }).join('');
+  const f=total.toLocaleString('en-IN');
+  document.getElementById('subtotal').textContent=f;
+  document.getElementById('total').textContent=f;
 }
-function closeModal(){
-  document.getElementById('outfit-modal').classList.remove('open');
-  document.body.style.overflow='';
-}
-function viewStyleGuide(name,occ){
-  closeModal();
-  go('guide');
+function toggleCart(){
+  document.getElementById('cart').classList.toggle('active');
+  document.getElementById('cart-overlay').classList.toggle('active');
 }
 
-/* ══════════ SEARCH ══════════ */
-function openSearch(){
-  document.getElementById('search-overlay').classList.add('open');
-  setTimeout(()=>document.getElementById('search-input').focus(),100);
-  document.body.style.overflow='hidden';
-}
-function closeSearch(){
-  document.getElementById('search-overlay').classList.remove('open');
-  document.getElementById('search-input').value='';
-  document.getElementById('search-results').innerHTML='';
-  document.body.style.overflow='';
-}
-function doSearch(q){
-  const res=document.getElementById('search-results');
-  if(!q.trim()){res.innerHTML='';return;}
-  const all=[...OUTFITS_WOMEN,...OUTFITS_MEN];
-  const matches=all.filter(o=>
-    o.name.toLowerCase().includes(q.toLowerCase())||
-    o.tags.some(t=>t.toLowerCase().includes(q.toLowerCase()))||
-    o.occ.toLowerCase().includes(q.toLowerCase())
-  );
-  if(!matches.length){res.innerHTML=`<p class="search-no-results">No results for "${q}"</p>`;return;}
-  res.innerHTML=matches.map(o=>`
-    <div class="search-result-item" onclick="closeSearch();openModal(${o.id})">
-      <div class="search-result-img">${o.emoji||'👗'}</div>
-      <div class="search-result-info">
-        <h4>${o.name}</h4>
-        <p>${o.occ.charAt(0).toUpperCase()+o.occ.slice(1)} · ${o.tags.join(' · ')}</p>
-      </div>
-    </div>`).join('');
-}
-document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeSearch();closeModal()}});
-
-/* ══════════ TRENDS ══════════ */
-function renderTrends(){
-  document.getElementById('trend-grid').innerHTML=TRENDS.map(t=>`
-    <div class="trend-card">
-      ${t.img?`<div class="trend-img-wrap"><img class="trend-img" src="${t.img}" alt="${t.name}" loading="lazy" onerror="this.parentElement.style.display='none'"/></div>`:''}
-      <div class="trend-card-body">
-        <div class="trend-season">${t.season}</div>
-        <div class="trend-name">${t.name}</div>
-        <div class="trend-desc">${t.desc}</div>
-        <div class="trend-items">${t.items.map(i=>`<span class="trend-item">${i}</span>`).join('')}</div>
-        <div class="trend-heat">
-          <span class="heat-label">Heat</span>
-          <div class="heat-bar"><div class="heat-fill" style="width:0%" data-w="${t.heat}%"></div></div>
-          <span style="font-size:.7rem;color:var(--gold)">${t.heat}%</span>
-        </div>
-      </div>
-    </div>`).join('');
-  // animate heat bars
-  setTimeout(()=>{
-    document.querySelectorAll('.heat-fill').forEach(el=>el.style.width=el.dataset.w);
-  },200);
+// ── WISHLIST ──
+function toggleWish(id,el){
+  el.classList.toggle('loved');
+  el.textContent=el.classList.contains('loved')?'♥':'♡';
 }
 
-/* ══════════ QUIZ ══════════ */
-function quizNext(step){
-  document.querySelectorAll('.quiz-step').forEach(s=>s.classList.remove('active'));
-  document.getElementById('qs'+step).classList.add('active');
-  document.querySelectorAll('.prog-dot').forEach((d,i)=>d.classList.toggle('done',i<step-1));
-}
-function selectQuizGender(g,el){
-  quizData.gender=g;
-  document.querySelectorAll('[onclick^="selectQuizGender"]').forEach(e=>e.classList.remove('selected'));
-  el.classList.add('selected');
-  document.getElementById('women-shapes').style.display=g==='women'?'block':'none';
-  document.getElementById('men-shapes').style.display=g==='men'?'block':'none';
-  quizData.shape=null;
-  document.querySelectorAll('.shape-option').forEach(e=>e.classList.remove('selected'));
-  checkQ1();
-}
-function selectShape(s,el){
-  quizData.shape=s;
-  const container=quizData.gender==='men'?document.getElementById('men-shapes'):document.getElementById('women-shapes');
-  container.querySelectorAll('.shape-option').forEach(e=>e.classList.remove('selected'));
-  el.classList.add('selected');
-  checkQ1();
-}
-function checkQ1(){
-  const ok=quizData.gender&&quizData.shape;
-  const b=document.getElementById('q1-next');b.disabled=!ok;b.style.opacity=ok?'1':'.4';
-}
-function selectStyle(s,el){
-  quizData.style=s;
-  document.querySelectorAll('.style-opt').forEach(e=>e.classList.remove('selected'));
-  el.classList.add('selected');
-  const b=document.getElementById('q2-next');b.disabled=false;b.style.opacity='1';
-}
-function selectOcc2(o,el){
-  quizData.occ=o;
-  document.querySelectorAll('#qs3 .style-opt').forEach(e=>e.classList.remove('selected'));
-  el.classList.add('selected');
-  const b=document.getElementById('q3-next');b.disabled=false;b.style.opacity='1';
-}
-function showResult(){
-  /* ── Shape data ─────────────────────────────────────────── */
-  const SHAPE_DATA={
-    /* WOMEN */
-    hourglass:{icon:'⌛',label:'Hourglass',gender:'women',
-      tagline:'Balanced proportions. Define the waist, celebrate the curve.',
-      desc:'Your bust and hips are naturally balanced with a well-defined waist — one of the most universally flattering silhouettes. Your goal is simple: celebrate what you have. Fitted pieces, wrap styles, and anything that highlights the waist will always work. Avoid oversized or shapeless cuts that hide your natural form.',
-      dos:['Wrap dresses & tops — they follow your curves perfectly','Belted coats and blazers that nip at the waist','High-waist bottoms paired with fitted tops','Bodycon or fitted midi dresses for evening'],
-      donts:['Dropped-waist cuts that flatten your best feature','Boxy or shapeless tops that obscure the waist','Oversized everything — one loose piece is fine, not two'],
-      palette:['#c17b40','#f0e6d3','#1a4a2e','#c9a84c'],
-      paletteNames:['Terracotta','Ivory','Forest','Gold'],
-      outfits:{casual:'Wrap linen top + high-waist barrel jeans + tan sandals',office:'Belted shirt dress or tailored blazer + straight trousers',ethnic:'Fitted anarkali or saree with a well-tailored blouse',evening:'Bodycon midi dress + strappy heels + one statement earring'},
-      accessories:['Thin belts to accentuate the waist','Wrap bags that mirror your silhouette','Delicate chain jewellery at the waist or neck'],
-      fabrics:['Jersey — drapes and follows curves','Silk — fluid and flattering','Tailored wools and crepe for structure'],
-    },
-    pear:{icon:'🍐',label:'Pear',gender:'women',
-      tagline:'Balanced upward. Bold shoulders, confident hips.',
-      desc:'Your hips are wider than your shoulders — a beautiful, feminine shape that calls for balance, not concealment. The formula is simple: draw attention upward with statement tops, bold necklines, and structured shoulders, while keeping bottoms in clean, streamlined silhouettes.',
-      dos:['Off-shoulder and boat-neck tops to widen the shoulder line','Structured blazers and jackets with shoulder detail','A-line skirts that skim over the hip and flare below','Dark, straight-cut bottoms paired with a bolder top'],
-      donts:['Cropped tops with wide-leg trousers — doubles the width','Clingy bottoms without a strong top','Side pockets on trousers — adds hip width'],
-      palette:['#1c3461','#e8c97a','#f0e6d3','#8b2635'],
-      paletteNames:['Navy','Champagne','Ivory','Ruby'],
-      outfits:{casual:'Bold print top + dark straight jeans + white sneakers',office:'Structured blazer + slim-fit trousers + kitten heels',ethnic:'Straight kurta with embroidery on the shoulders + palazzos',evening:'Statement top + dark wide-leg trousers + strappy sandals'},
-      accessories:['Statement earrings — draws focus upward','Scarf or neckpiece','Structured top-handle bag'],
-      fabrics:['Stiff fabrics above (structured cotton, linen)','Flowy or matte below (crepe, ponte)','Avoid shiny bottoms that reflect light'],
-    },
-    apple:{icon:'🍎',label:'Apple',gender:'women',
-      tagline:'Elongate. Define above. Let the rest flow.',
-      desc:'Your midsection is the widest point, with slimmer legs and good shoulders. The goal is to create a defined silhouette and visual length — empire waistlines, open necklines, and monochrome dressing are your strongest tools.',
-      dos:['Empire waist dresses — define above the fullest point','V-necks and deep scoop necks to elongate the torso','Monochrome looks from top to toe for instant length','Flowy, non-clingy fabric through the midsection'],
-      donts:['Wide belts at the natural waist — draws attention there','Tucked-in tops that expose the midsection','Cropped tops of any kind','Horizontal stripes across the torso'],
-      palette:['#2c1810','#c17b40','#4a3728','#d4a57a'],
-      paletteNames:['Deep Brown','Terracotta','Bark','Sand'],
-      outfits:{casual:'Long flowy tunic + straight trousers + flats',office:'Open-front blazer + straight trousers + V-neck inside',ethnic:'Anarkali kurta or flowy saree with a draping pallu',evening:'Empire waist gown or a long flowy midi dress'},
-      accessories:['Long pendant necklaces — vertical lines elongate','Pointed-toe heels — lengthens the leg','Structured bags at the hip level'],
-      fabrics:['Chiffon and georgette — fluid and non-clinging','Matte jersey — no sheen to highlight contours','Structured suiting above the waist'],
-    },
-    rectangle:{icon:'▭',label:'Rectangle',gender:'women',
-      tagline:'Create curves. Add volume. Own every layer.',
-      desc:'Your shoulders, waist, and hips are roughly the same width — a canvas that works beautifully with volume, texture, and layering. The goal is to create the illusion of curves through strategic volume and contrasting waistlines.',
-      dos:['Peplum tops and dresses that add hip curve','Belted looks to define a waist where one is less visible','Ruffles, pleats, and volume at the hip or shoulder','Layered looks with contrasting pieces'],
-      donts:['Straight column dresses with no waist detail','Too-tight clothes that reveal the straight silhouette','Skipping accessories — they add dimension'],
-      palette:['#3b5998','#c9a84c','#f0e6d3','#2c1810'],
-      paletteNames:['Cobalt','Gold','Cream','Espresso'],
-      outfits:{casual:'Cropped top + high-waist full skirt + sneakers',office:'Peplum blouse + tailored trousers + block heels',ethnic:'Lehenga or sharara — the volume creates instant curves',evening:'Fit-and-flare dress + pointed heels + belt'},
-      accessories:['Wide belts at the waist — the most powerful tool','Statement bag at the hip adds width','Layered necklaces and bracelets for dimension'],
-      fabrics:['Structured fabrics with body — dupion, taffeta','Fabrics that hold pleats — chiffon, organza','Any fabric with texture — tweed, jacquard'],
-    },
-    /* MEN */
-    athletic:{icon:'🏋️',label:'Athletic',gender:'men',
-      tagline:'Built for structure. Wear pieces that respect your silhouette.',
-      desc:'A broad shoulder, V-taper, and defined physique are your assets. Your challenge is finding cuts that fit the shoulders without being too tight through the chest, and that taper cleanly through the waist. Slim and tailored are your keywords — not tight.',
-      dos:['Slim-fit shirts and blazers that respect the shoulder line','Tapered trousers that follow the leg without being restrictive','Fitted crew-neck or V-neck tees for casual dressing','Well-structured suits in a mid-weight wool'],
-      donts:['Oversized shirts — they lose your silhouette','Baggy trousers — creates a top-heavy impression','Tight T-shirts — slim is not the same as body-hugging'],
-      palette:['#1c1c2e','#c9a84c','#f0e6d3','#2c1810'],
-      paletteNames:['Midnight Navy','Gold','Off-White','Espresso'],
-      outfits:{casual:'Fitted tee + tapered chinos + clean leather sneakers',office:'Slim-fit suit or blazer + tapered trousers + Oxford shirt',ethnic:'Fitted kurta + slim churidar — a classic that always works',evening:'Fitted dress shirt + slim trousers + Chelsea boots'},
-      accessories:['A slim leather belt','A quality watch — understated or statement, pick one','Minimal jewellery — one ring or a chain, not both'],
-      fabrics:['Mid-weight wool and cotton-wool blends for structure','Stretch cotton for casual pieces','Avoid stiff fabrics that add bulk to the chest'],
-    },
-    slim:{icon:'🪄',label:'Slim',gender:'men',
-      tagline:'Layer up. Add structure. Own the volume.',
-      desc:'Your lean frame is an incredible canvas for layering and volume. Where others have to avoid bulk, you can embrace it. Double-breasted jackets, chunky knitwear, and structured outerwear are your tools to build a powerful silhouette.',
-      dos:['Double-breasted and structured blazers — adds chest width','Horizontal stripes to create visual width','Chunky knitwear and heavy-weight fabrics for presence','Layering: a shirt, then a knit, then a jacket'],
-      donts:['Very slim or skinny fits — emphasises leanness','Lightweight, thin fabrics that cling','Monochrome from head to toe without layering'],
-      palette:['#2e4a2e','#c9a84c','#8b6355','#f0e6d3'],
-      paletteNames:['Forest','Gold','Warm Brown','Cream'],
-      outfits:{casual:'Chunky knit + straight denim + boots',office:'Double-breasted blazer + wide-leg trousers + Oxford shirt',ethnic:'Embellished sherwani or a heavily layered bandhgala',evening:'Structured suit jacket + layered shirt + loafers'},
-      accessories:['Wide belts with visible hardware','Scarves add bulk and style simultaneously','Chunky watches or bracelets add wrist presence'],
-      fabrics:['Heavy cotton, corduroy, tweed, herringbone','Structured wools that hold their shape','Avoid silk, jersey, or anything that drapes loosely'],
-    },
-    stocky:{icon:'🪨',label:'Stocky',gender:'men',
-      tagline:'Elongate. Monochrome. Vertical lines only.',
-      desc:'Your compact, broad build is best dressed with vertical lines, monochrome palettes, and well-tailored single-breasted pieces. The goal is height — every style decision should make you look taller and leaner.',
-      dos:['Single-breasted suits and jackets — vertical lines only','V-necklines to open up the chest area','Monochrome dressing top to bottom for visual length','Dark colours for a streamlined effect'],
-      donts:['Double-breasted jackets — widens horizontally','Short jackets that visually shorten the torso','Busy horizontal patterns','Very wide-leg trousers'],
-      palette:['#0c0b09','#2c1810','#c9a84c','#4a3728'],
-      paletteNames:['Jet','Espresso','Gold','Bark'],
-      outfits:{casual:'Dark straight jeans + V-neck tee + clean sneakers',office:'Dark single-breasted suit + slim tie + Oxford shoes',ethnic:'Straight sherwani or long kurta + slim churidar',evening:'All-dark monochrome look + pointed dress shoes'},
-      accessories:['Slim ties and pocket squares','Vertical-strap bags and briefcases','Avoid wide horizontal belts'],
-      fabrics:['Dark, matte fabrics for slimming effect','Smooth wool and cotton for clean lines','Avoid bulky textures like heavy tweed'],
-    },
-    tall:{icon:'📏',label:'Tall',gender:'men',
-      tagline:'Your canvas is your gift. Break it up boldly.',
-      desc:'You carry proportions that most men aspire to. Wide trousers, bold prints, and long overcoats that would overwhelm shorter frames sit perfectly on yours. Break up your vertical height with contrasting layers and horizontal colour blocks.',
-      dos:['Wide-leg trousers — fills your long frame with presence','Bold print shirts — you have the canvas for statement pieces','Overcoats and long jackets — built for your proportions','Colour-blocking to break up the silhouette into sections'],
-      donts:['Very slim-fit everything — can look lanky','All one colour from head to toe — loses visual interest','Cropped anything — can look disproportionate'],
-      palette:['#1a4a2e','#c17b40','#1c3461','#f0e6d3'],
-      paletteNames:['Forest','Terracotta','Navy','Ivory'],
-      outfits:{casual:'Wide-leg trousers + colour-block shirt + chunky sneakers',office:'Relaxed-fit suit + contrast shirt + Oxford shoes',ethnic:'Achkan or full-length sherwani — made for your frame',evening:'Two-tone tuxedo look or bold print evening shirt'},
-      accessories:['Statement watches','Layered necklaces or bracelets work on tall frames','Large structured bags or backpacks'],
-      fabrics:['Any fabric works — you can carry it all','Experiment with textures: linen, tweed, velvet','Bold patterns — plaids, large florals, colour blocks'],
-    },
-  };
-
-  /* ── Style×Occasion outfit modifier ───────────────────── */
-  const STYLE_TIPS={
-    minimal:{label:'Minimal & Clean',tip:'For your style, prioritise neutral palettes and impeccable fit over decoration. Less is always more — one quality piece over five average ones.'},
-    bold:{label:'Bold & Statement',tip:'For your style, embrace colour, print, and silhouette as self-expression. One bold hero piece per outfit, then let it breathe.'},
-    classic:{label:'Classic & Elegant',tip:'For your style, invest in timeless cuts and quality fabrics. Avoid fast trends — your wardrobe should look as relevant in 10 years as it does today.'},
-    casual:{label:'Casual & Relaxed',tip:'For your style, comfort and intention are not opposites. Clean casuals in well-chosen fabrics always look effortless — not careless.'},
-  };
-  const OCC_TIPS={
-    college:{label:'College / University',tip:'Build around versatile basics that transition from lectures to evenings. A good pair of jeans and two quality tops take you everywhere.'},
-    office:{label:'Office / Work',tip:'Invest in two or three great tailored pieces. They compound in value — you will wear them hundreds of times.'},
-    ethnic:{label:'Ethnic & Festive',tip:'The Indian festive wardrobe is an investment. One quality piece per year — a good saree, a fine kurta — builds a wardrobe that lasts decades.'},
-    evening:{label:'Evening & Social',tip:'Evening dressing rewards specificity. Know the occasion before opening your wardrobe. The right outfit starts with the right question.'},
-  };
-
-  const s=SHAPE_DATA[quizData.shape]||SHAPE_DATA.hourglass;
-  const styleTip=STYLE_TIPS[quizData.style]||STYLE_TIPS.minimal;
-  const occTip=OCC_TIPS[quizData.occ]||OCC_TIPS.college;
-  const outfit=s.outfits[quizData.occ]||s.outfits.casual;
-  const gLabel=quizData.gender==='men'?'Men':'Women';
-
-  document.getElementById('result-content').innerHTML=`
-    <!-- Profile Card -->
-    <div style="background:var(--card);border:1px solid var(--border2);padding:2.5rem;margin-bottom:3rem;text-align:center;position:relative;overflow:hidden">
-      <div style="position:absolute;top:-20px;right:-20px;font-size:8rem;opacity:.04;pointer-events:none">${s.icon}</div>
-      <div style="font-size:.6rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem">Your Style Profile</div>
-      <div style="font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;color:var(--gold);line-height:1">${s.label}</div>
-      <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.1rem;color:var(--muted);margin:.6rem 0 1.5rem">${s.tagline}</div>
-      <div style="display:flex;gap:.6rem;justify-content:center;flex-wrap:wrap">
-        <span style="border:1px solid var(--border2);color:var(--gold);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;padding:.3rem .9rem">${gLabel}</span>
-        <span style="border:1px solid var(--border2);color:var(--gold);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;padding:.3rem .9rem">${styleTip.label}</span>
-        <span style="border:1px solid var(--border2);color:var(--gold);font-size:.62rem;letter-spacing:.15em;text-transform:uppercase;padding:.3rem .9rem">${occTip.label}</span>
-      </div>
-    </div>
-
-    <!-- Two-col: Description + Palette -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-bottom:3rem" class="result-two-col">
-      <div>
-        <div style="font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem">About Your Shape</div>
-        <p style="font-size:.88rem;color:var(--muted);line-height:1.9">${s.desc}</p>
-      </div>
-      <div>
-        <div style="font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem">Your Colour Palette</div>
-        <div style="display:flex;gap:.5rem;margin-bottom:.8rem">
-          ${s.palette.map((hex,i)=>`<div style="flex:1;height:50px;background:${hex};border:1px solid rgba(255,255,255,.1)" title="${s.paletteNames[i]}"></div>`).join('')}
-        </div>
-        <div style="display:flex;gap:.5rem;flex-wrap:wrap">
-          ${s.palette.map((hex,i)=>`<span style="font-size:.68rem;color:var(--muted)">${s.paletteNames[i]}</span>`).join('<span style="color:var(--border2)"> · </span>')}
-        </div>
-        <p style="font-size:.78rem;color:var(--muted);line-height:1.7;margin-top:.8rem">These tones consistently work for your shape and complement a range of Indian skin tones.</p>
-      </div>
-    </div>
-
-    <!-- Dos and Don'ts -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:3rem" class="result-two-col">
-      <div style="background:var(--card);border:1px solid var(--border);padding:1.8rem">
-        <div style="font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:#6db87a;margin-bottom:1rem">✓ What Works</div>
-        ${s.dos.map(d=>`<div style="font-size:.83rem;color:var(--muted);padding:.5rem 0;border-bottom:1px solid var(--border);line-height:1.6;display:flex;gap:.6rem"><span style="color:#6db87a;flex-shrink:0">✓</span>${d}</div>`).join('')}
-      </div>
-      <div style="background:var(--card);border:1px solid var(--border);padding:1.8rem">
-        <div style="font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:#c97a7a;margin-bottom:1rem">✗ What to Avoid</div>
-        ${s.donts.map(d=>`<div style="font-size:.83rem;color:var(--muted);padding:.5rem 0;border-bottom:1px solid var(--border);line-height:1.6;display:flex;gap:.6rem"><span style="color:#c97a7a;flex-shrink:0">✗</span>${d}</div>`).join('')}
-      </div>
-    </div>
-
-    <!-- Outfit for your occasion -->
-    <div style="background:var(--card);border:1px solid var(--border2);padding:2rem;margin-bottom:3rem">
-      <div style="font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:.4rem">Your Go-To Outfit</div>
-      <div style="font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:1rem">Based on your ${occTip.label} lifestyle</div>
-      <p style="font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;color:var(--cream);line-height:1.4">${outfit}</p>
-    </div>
-
-    <!-- Accessories + Fabrics -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:3rem" class="result-two-col">
-      <div style="background:var(--card);border:1px solid var(--border);padding:1.8rem">
-        <div style="font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem">Accessories That Work</div>
-        ${s.accessories.map(a=>`<div style="font-size:.83rem;color:var(--muted);padding:.5rem 0;border-bottom:1px solid var(--border);line-height:1.6">◆ ${a}</div>`).join('')}
-      </div>
-      <div style="background:var(--card);border:1px solid var(--border);padding:1.8rem">
-        <div style="font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem">Best Fabrics for You</div>
-        ${s.fabrics.map(f=>`<div style="font-size:.83rem;color:var(--muted);padding:.5rem 0;border-bottom:1px solid var(--border);line-height:1.6">◆ ${f}</div>`).join('')}
-      </div>
-    </div>
-
-    <!-- Style + Occasion wisdom -->
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:3rem" class="result-two-col">
-      <div style="border:1px solid var(--border2);padding:1.8rem;position:relative;overflow:hidden">
-        <div style="position:absolute;right:1rem;top:.8rem;font-size:1.2rem;opacity:.2">✦</div>
-        <div style="font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem">Your Style Mantra</div>
-        <p style="font-size:.85rem;color:var(--cream);line-height:1.85">${styleTip.tip}</p>
-      </div>
-      <div style="border:1px solid var(--border2);padding:1.8rem;position:relative;overflow:hidden">
-        <div style="position:absolute;right:1rem;top:.8rem;font-size:1.2rem;opacity:.2">✦</div>
-        <div style="font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem">Wardrobe Priority</div>
-        <p style="font-size:.85rem;color:var(--cream);line-height:1.85">${occTip.tip}</p>
-      </div>
-    </div>
-
-    <!-- Outfit ideas for all 4 occasions -->
-    <div style="margin-bottom:3rem">
-      <div style="font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);margin-bottom:1.5rem">Outfit Ideas Across Occasions</div>
-      <div class="result-outfits">
-        <div class="result-card"><div class="result-card-icon">🎓</div><h4>College</h4><p>${s.outfits.college}</p></div>
-        <div class="result-card"><div class="result-card-icon">💼</div><h4>Office</h4><p>${s.outfits.office}</p></div>
-        <div class="result-card"><div class="result-card-icon">🪷</div><h4>Ethnic</h4><p>${s.outfits.ethnic}</p></div>
-        <div class="result-card"><div class="result-card-icon">🌙</div><h4>Evening</h4><p>${s.outfits.evening}</p></div>
-      </div>
-    </div>
-
-    <!-- Actions -->
-    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;padding-top:1rem;border-top:1px solid var(--border)">
-      <button class="btn-outline" onclick="retakeQuiz()">↺ Retake Quiz</button>
-      <button class="btn-gold" onclick="go('occasion')">Browse Outfits →</button>
-      <button class="btn-outline" onclick="go('guide')">Style Guide ✦</button>
-    </div>`;
-
-  /* inject responsive style for result two-col */
-  if(!document.getElementById('result-resp-style')){
-    const st=document.createElement('style');
-    st.id='result-resp-style';
-    st.textContent='@media(max-width:640px){.result-two-col{grid-template-columns:1fr!important}}';
-    document.head.appendChild(st);
-  }
-
-  quizNext(4);
-}
-function retakeQuiz(){
-  quizData={shape:null,style:null,occ:null,gender:null};
-  document.querySelectorAll('.shape-option,.style-opt').forEach(e=>e.classList.remove('selected'));
-  document.getElementById('women-shapes').style.display='block';
-  document.getElementById('men-shapes').style.display='none';
-  ['q1-next','q2-next','q3-next'].forEach(id=>{const b=document.getElementById(id);if(b){b.disabled=true;b.style.opacity='.4'}});
-  quizNext(1);
-}
-
-/* ══════════ ACCESSORIES ══════════ */
-function renderAccessories(filter){
-  const data=filter==='all'?ACCESSORIES:ACCESSORIES.filter(a=>a.cat===filter);
-  document.getElementById('acc-grid').innerHTML=data.map(a=>`
-    <div class="acc-card" style="animation:fadeUp .5s both">
-      ${a.badge?`<div class="acc-badge">${a.badge}</div>`:''}
-      <div class="acc-visual">
-        ${a.img?`<img class="acc-img" src="${a.img}" alt="${a.name}" loading="lazy" onerror="this.style.display='none'"/>`:``}
-        <span class="acc-icon-fallback">${a.icon}</span>
-      </div>
-      <div class="acc-body">
-        <div class="acc-name">${a.name}</div>
-        <div class="acc-match">${a.match}</div>
-        <div class="acc-chips">${a.chips.map(c=>`<span class="chip">${c}</span>`).join('')}</div>
-      </div>
-    </div>`).join('');
-}
-function filterAcc(cat,btn){
-  document.querySelectorAll('.acc-pill').forEach(b=>b.classList.remove('active'));
-  btn.classList.add('active');
-  renderAccessories(cat);
-}
-
-/* ══════════ COLOUR COMBINATIONS ══════════ */
-function renderSwatches(){
-  ['base-swatches','bottom-swatches','accent-swatches'].forEach((id)=>{
-    document.getElementById(id).innerHTML=COLOURS.map((c,i)=>`
-      <div class="swatch" style="background:${c.hex}" title="${c.name}"
-        onclick="pickSwatch('${id}',${i},this,'${c.name}','${c.hex}')"></div>`).join('');
-  });
-}
-function pickSwatch(sectionId,idx,el,name,hex){
-  document.querySelectorAll(`#${sectionId} .swatch`).forEach(s=>s.classList.remove('active'));
+// ── FILTERS ──
+function setCategory(cat,el){
+  activeCategory=cat;
+  document.querySelectorAll('#category-pills .pill').forEach(p=>p.classList.remove('active'));
   el.classList.add('active');
-  if(sectionId==='base-swatches') selBase={name,hex};
-  if(sectionId==='bottom-swatches') selBottom={name,hex};
-  if(sectionId==='accent-swatches') selAccent={name,hex};
+  renderProducts();
 }
-function buildPalette(){
-  if(!selBase||!selBottom){toast('Please pick at least Base & Bottom colours');return;}
-  const key=`${selBase.name}+${selBottom.name}`;
-  const desc=COMBOS[key]||COMBOS.default;
-  const accent=selAccent||{name:'Gold',hex:'#c9a84c'};
-  document.getElementById('colour-result').innerHTML=`
-    <div class="palette-preview">
-      <h3>${selBase.name} · ${selBottom.name} · ${accent.name}</h3>
-      <div class="palette-strip">
-        <div class="palette-swatch" style="background:${selBase.hex}" title="${selBase.name}"></div>
-        <div class="palette-swatch" style="background:${selBottom.hex}" title="${selBottom.name}"></div>
-        <div class="palette-swatch" style="background:${accent.hex}" title="${accent.name}"></div>
+function doSearch(){searchQuery=document.getElementById('search-input').value;renderProducts();}
+function sortProducts(val){sortMode=val;renderProducts();}
+function setOccasion(val){activeOccasion=val;renderProducts();}
+function setColor(val){activeColor=val;renderProducts();}
+function setPriceRange(val){activePriceRange=val;renderProducts();}
+function setOccasionCombo(occ,el){
+  activeComboOccasion=occ;
+  document.querySelectorAll('.occ-tab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+  renderCombos();
+}
+
+// ── AI PANEL ──
+function toggleAI(){
+  document.getElementById('ai-panel').classList.toggle('active');
+  document.getElementById('ai-overlay').classList.toggle('active');
+}
+
+function selectOpt(el,group,val){
+  const parent=el.parentElement;
+  parent.querySelectorAll('.option-btn').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+  aiProfile[group]=val;
+  updateAvatar();
+}
+
+function selectSkin(el,val){
+  document.querySelectorAll('.skin-btn').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+  aiProfile.skin=val;
+  updateAvatarSkin(el.style.background);
+}
+
+// ── AVATAR UPDATE ──
+function updateAvatar(){
+  // body shape
+  const bodyEl=document.getElementById('av-body');
+  const bodyMap={
+    'Pear':{rx:30,ry:42,cy:130},'Apple':{rx:32,ry:36,cy:126},
+    'Hourglass':{rx:26,ry:40,cy:128},'Rectangle':{rx:26,ry:38,cy:126},
+    'Inverted Triangle':{rx:30,ry:35,cy:122},'Petite':{rx:22,ry:32,cy:122}
+  };
+  const b=bodyMap[aiProfile.body]||{rx:28,ry:38,cy:125};
+  bodyEl.setAttribute('rx',b.rx);bodyEl.setAttribute('ry',b.ry);bodyEl.setAttribute('cy',b.cy);
+  // outfit color based on skin tone
+  const topEl=document.getElementById('av-top');
+  const colorMap={'Fair':'#e8a0bf','Wheatish':'#f0c060','Medium':'#60b8c8','Olive':'#a0c870','Dark':'#8060d8','Deep':'#e05050'};
+  topEl.setAttribute('fill',colorMap[aiProfile.skin]||'#c9a84c');
+}
+
+function updateAvatarSkin(color){
+  document.getElementById('av-head').setAttribute('fill',color||'#e8c49a');
+  const armColor=color||'#e8c49a';
+  updateAvatar();
+}
+
+function updateAvatarHair(style){
+  const hair=document.getElementById('av-hair');
+  const hairStyles={
+    'Short':`<ellipse cx="55" cy="44" rx="22" ry="8" fill="#4a2c2a"/>`,
+    'Long':`<ellipse cx="55" cy="42" rx="22" ry="10" fill="#4a2c2a"/><ellipse cx="33" cy="72" rx="8" ry="26" fill="#4a2c2a"/><ellipse cx="77" cy="72" rx="8" ry="26" fill="#4a2c2a"/>`,
+    'Curly':`<ellipse cx="55" cy="40" rx="24" ry="14" fill="#4a2c2a"/><circle cx="35" cy="52" r="10" fill="#4a2c2a"/><circle cx="75" cy="52" r="10" fill="#4a2c2a"/><circle cx="45" cy="38" r="8" fill="#4a2c2a"/><circle cx="65" cy="38" r="8" fill="#4a2c2a"/>`,
+    'Bun':`<ellipse cx="55" cy="44" rx="22" ry="8" fill="#4a2c2a"/><circle cx="55" cy="30" r="12" fill="#4a2c2a"/>`,
+    'Straight':`<ellipse cx="55" cy="42" rx="22" ry="10" fill="#4a2c2a"/><rect x="27" y="52" width="10" height="50" rx="5" fill="#4a2c2a"/><rect x="73" y="52" width="10" height="50" rx="5" fill="#4a2c2a"/>`,
+    'Ponytail':`<ellipse cx="55" cy="44" rx="22" ry="8" fill="#4a2c2a"/><ellipse cx="55" cy="32" rx="10" ry="8" fill="#4a2c2a"/><ellipse cx="78" cy="55" rx="5" ry="22" fill="#4a2c2a"/>`
+  };
+  hair.innerHTML=hairStyles[style]||hairStyles['Long'];
+}
+
+// ── AI RECOMMENDATIONS ──
+function generateRecommendations(){
+  // Rule-based recommendation engine
+  const recEl=document.getElementById('ai-results');
+  const listEl=document.getElementById('ai-rec-list');
+  recEl.style.display='block';
+
+  const colorRecs={
+    'Fair':['Pink','White','Blue','Red'],
+    'Wheatish':['Gold','Beige','Green','Blue'],
+    'Medium':['Red','Orange','Blue','Green'],
+    'Olive':['White','Beige','Green','Blue'],
+    'Dark':['White','Gold','Red','Pink'],
+    'Deep':['White','Gold','Blue','Red']
+  };
+  const styleMap={'Ethnic':['Kurta','Saree','Anarkali','Lehenga','Sherwani'],'Casual':['T-Shirt','Jeans','Polo','Top'],'Formal':['Blazer','Shirt','Trousers','Suit'],'Party':['Dress','Anarkali','Sharara']};
+  
+  const preferredColors=colorRecs[aiProfile.skin]||[];
+  const preferredTypes=styleMap[aiProfile.style]||[];
+  
+  let scored=allProducts.map(p=>{
+    let score=0;
+    if(preferredColors.includes(p.color))score+=3;
+    if(preferredTypes.includes(p.type))score+=4;
+    if(aiProfile.style&&(p.occasion||'').toLowerCase().includes(aiProfile.style.toLowerCase()))score+=2;
+    score+=p.rating*0.5;
+    score+=Math.random()*0.5; // slight randomness
+    return {...p,score};
+  }).sort((a,b)=>b.score-a.score).slice(0,5);
+
+  const whyMap={skin:`Great for ${aiProfile.skin||'your'} skin tone`,body:`Flatters ${aiProfile.body||'your'} body shape`,style:`Matches your ${aiProfile.style||'style'} preference`};
+
+  listEl.innerHTML=scored.map(p=>`
+    <div class="outfit-card">
+      <img src="${p.image}" alt="${p.name}" onerror="this.src='https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&q=80'">
+      <div class="outfit-info">
+        <h4>${p.name}</h4>
+        <p>${p.brand} · ${p.price}</p>
+        <div class="why">✨ ${p.color?`${p.color} color — ${whyMap.skin}. `:''} ${p.type} — ${whyMap.body}.</div>
+        <button class="outfit-add-btn" onclick="addToCart(${p.id})">Add to Cart</button>
       </div>
-      <div class="combo-name">Colour Story</div>
-      <p class="combo-desc">${desc}</p>
     </div>
-    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;margin-bottom:1.2rem;color:var(--gold)">Outfit Ideas with This Palette</h3>
-    <div class="outfit-suggestions-mini">
-      <div class="mini-outfit"><div class="icon">🧥</div><h4>${selBase.name} Blazer, ${selBottom.name} Trousers</h4><p>Tonal layering with your base as the statement. Add ${accent.name.toLowerCase()} jewellery for polish.</p></div>
-      <div class="mini-outfit"><div class="icon">👗</div><h4>${selBottom.name} Midi Dress, ${accent.name} Belt</h4><p>The accent defines the waist. The base colour returns as earrings or a bag.</p></div>
-      <div class="mini-outfit"><div class="icon">👔</div><h4>${selBase.name} Shirt, ${selBottom.name} Wide-Leg</h4><p>A clean contrast that reads as intentional. Finish with ${accent.name.toLowerCase()} footwear.</p></div>
-      <div class="mini-outfit"><div class="icon">🪭</div><h4>Monochrome ${selBase.name} Saree, ${accent.name} Border</h4><p>Ethnic silhouette grounded in your palette. Restrained and refined.</p></div>
-    </div>
-    <div style="margin-top:2rem;padding:1.5rem;background:var(--card);border:1px solid var(--border)">
-      <div style="font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem">The 60-30-10 Rule</div>
-      <p style="font-size:.85rem;color:var(--muted);line-height:1.8">
-        Use <strong style="color:var(--cream)">${selBase.name}</strong> for 60% of your look,
-        <strong style="color:var(--cream)">${selBottom.name}</strong> for 30%, and
-        <strong style="color:var(--cream)">${accent.name}</strong> for 10% as your accent detail.
-      </p>
-    </div>`;
+  `).join('');
+  
+  showToast('✨ AI recommendations generated!');
 }
 
-/* ══════════ SAVED ══════════ */
-function renderSaved(){
-  saved=JSON.parse(localStorage.getItem('sg_saved')||'[]');
-  const grid=document.getElementById('saved-grid');
-  const empty=document.getElementById('saved-empty');
-  if(!saved.length){grid.innerHTML='';empty.style.display='block';return;}
-  empty.style.display='none';
-  const all=[...OUTFITS_WOMEN,...OUTFITS_MEN];
-  const data=all.filter(o=>saved.includes(o.id));
-  grid.innerHTML=data.map(o=>outfitCard(o)).join('');
+// ── TOAST ──
+function showToast(msg){
+  const t=document.getElementById('toast');
+  document.getElementById('toast-msg').textContent=msg;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2800);
 }
 
-/* ══════════ STYLE GUIDE ══════════ */
-function scrollToGuide(id){
-  const el=document.getElementById('guide-'+id);
-  if(el){el.scrollIntoView({behavior:'smooth',block:'start'});}
-  document.querySelectorAll('.guide-toc-link').forEach(l=>l.classList.remove('active'));
-  event.target.classList.add('active');
+function showCheckoutToast(){
+  if(!cart.length){showToast('Your cart is empty!');return;}
+  showToast(`🎉 Order placed! Total: ₹${document.getElementById('total').textContent}`);
+  cart=[];
+  updateCartUI();
+  toggleCart();
 }
 
-/* ══════════ SCROLL REVEAL ══════════ */
-const obs=new IntersectionObserver(entries=>{
-  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('on');obs.unobserve(e.target)}});
-},{threshold:.1});
-document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-
-/* ══════════ INIT ══════════ */
-renderOutfits('all');
-renderAccessories('all');
-renderTrends();
+// ── INIT ──
+renderProducts();
+renderCombos();
+updateCartUI();
 </script>
 </body>
 </html>
